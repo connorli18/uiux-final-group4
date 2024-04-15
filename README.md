@@ -1,5 +1,7 @@
-# uiux-final-group4
-uiux final project group 4
+# Overview
+This project is a web application used to help user learn how to make bar drinks
+(This is a test to see if pushing works)
 
+# Members
+Connor, Farris, Nguyen
 
-Members: Connor, Farris, Nguyen
