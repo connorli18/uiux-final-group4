@@ -25,6 +25,9 @@ def quizPage():
 def bartenderPage():
     return render_template("bartender.html")
 
+@app.route('/result')                                    
+def resultPage():
+    return render_template("result.html")
 
 @app.route('/get-bar-items')
 def get_items():
@@ -36,6 +39,7 @@ def get_items():
         'syrups': ['static/images/syrups/simple.png'],
         'juices-mixer': ['static/images/juices-mixer/espresso.png', 'static/images/juices-mixer/pineapple.png', 'static/images/juices-mixer/peach.png'],
         'glassware': ['static/images/glassware/coupe.png', 'static/images/glassware/martini.png', 'static/images/glassware/flute.png'],
+        'ice': ['static/images/ice/ice.png']
     }
 
     return jsonify(image_list[category])
