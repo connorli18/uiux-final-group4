@@ -8,23 +8,6 @@ window.onload = function() {
             }
         })
         .catch(error => console.error('Error:', error));
-
-    var coaster = document.querySelector('.coaster-two');
-
-    coaster.addEventListener('dragover', function(e) {
-        e.preventDefault();
-    });
-
-    coaster.addEventListener('drop', function(e) {
-        e.preventDefault();
-
-        // Only allow one glassware to be dropped
-        if (coaster.childElementCount === 0) {
-            var id = e.dataTransfer.getData('text/plain');
-            var glassware = document.getElementById(id);
-            coaster.appendChild(glassware);
-        }
-    });
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -85,19 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         items.forEach(item => {
                             const itemElement = document.createElement('img');
                             itemElement.src = item;
-                            itemElement.id = item;  // Add an id to each item
-                            itemElement.draggable = true;
-
-                            itemElement.addEventListener('dragstart', function(e) {
-                                e.dataTransfer.setData('text/plain', itemElement.id);
-                            });
-
-                            itemElement.addEventListener('dragend', function(e) {
-                                // If the item is not dropped on the coaster, it will snap back to its original position
-                                if (e.dataTransfer.dropEffect === 'none') {
-                                    box.appendChild(itemElement);
-                                }
-                            });
 
                             // Apply some styles to the item element
                             itemElement.style.marginRight = '20px';
@@ -108,7 +78,23 @@ document.addEventListener('DOMContentLoaded', function() {
                             itemElement.style.width = 'auto';  // Change this to make each item take up 1/3 of the box
                             itemElement.style.objectFit = 'scale-down';  // Change this to keep the aspect ratio of the images
                             itemElement.style.height = 'auto';
-                            
+
+                            // Add an event listener to the item element that changes the image source of the coaster-two div when clicked
+                            // But only if the item is a glassware
+                            if (this.id === 'glassware') {
+                                itemElement.addEventListener('click', function() {
+                                    const coasterImg = document.querySelector('.coaster-two img');
+                                    const coasterText = document.querySelector('.text-coaster');
+                                    if (coasterImg) {
+                                        coasterImg.src = item;
+                                        coasterImg.style.width = 'auto';  // Set the width of the image
+                                        coasterImg.style.height = '150px';  // Set the height of the image
+                                        coasterImg.style.objectFit = 'contain';  // Ensure that the aspect ratio of the image is maintained
+                                        coasterText.style.marginTop = '30px';
+                                    }
+                                });
+                            }
+
                             box.appendChild(itemElement);
                         });
                     })
