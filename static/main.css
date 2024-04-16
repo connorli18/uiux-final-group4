@@ -58,3 +58,135 @@ body{
     align-items: right; 
     color: black;
 }
+
+.items-menu{
+    margin-top: 175px;
+    margin-bottom: 45px;
+    font-size: 35px;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+    border: 1px solid black;
+    padding: 0px;
+}
+
+.active {
+    background-color: #6a94c8;  // Change this to the color you want
+}
+
+.category{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    margin-left: 0px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+    border: 1px solid black;
+    cursor: pointer; /* Changes the cursor to a hand icon when hovering over the div */
+}
+
+.category:hover {
+    background-color: #6a94c8; /* Change to the color you want on hover */
+}
+
+.notepad {
+    position: absolute;
+    top: 150px;
+    right: 200px;
+    width: 150px;
+    height: auto;
+}
+
+.notepad-two{
+    position: relative;
+}
+
+.notepad img {
+    width: 100%;
+    height: auto;
+}
+
+.notepad .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;  
+    font-size: 25px;  
+    background-color: #fff;  
+}
+
+.trashcan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trashcan img {
+    width: 100px;
+    height: auto;
+}
+
+.the-bottom-of-bartender{
+    display:flex;
+}
+
+.coaster{
+    padding-right: 80px;
+    padding-left: 50px;
+}
+
+.coaster-two{
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: -10px;
+    margin-bottom: -30px;
+}
+
+.text-coaster{
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+}
+
+.coaster img{
+    width: 170px;
+    height: auto;
+}
+
+.shaker{    
+    margin-top: -60px;
+}
+
+.shaker-two{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shaker img{
+    width: 200px;
+    height: auto;
+}
+
+.button-container-shaker{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mix-button{
+    margin-right: 10px;
+}
+
+.shake-button{
+    margin-left: 10px;
+}
+

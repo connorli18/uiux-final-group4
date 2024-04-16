@@ -44,8 +44,9 @@
             {% endblock %}
         </div>
 
+
         <!-- Link to the js file -->
         <script type="text/javascript" src="{{ url_for('static', filename = 'bar.js') }}"></script>
-
+        {% block scripts %}{% endblock %}
     </body>
 </html>

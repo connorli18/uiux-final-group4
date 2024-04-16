@@ -2,6 +2,58 @@
 
 {% block content %}
 
-<div>Hello from bartender page</div>
+<div class="items-menu col-2">
+    <div class="category liquors" id="liquors">
+        Liquors
+    </div>
+    <div class="category liqueurs" id="liqueurs">
+        Liqueurs
+    </div>
+    <div class="category syrups" id="syrups">
+        Syrups
+    </div>
+    <div class="category juices-mixer" id="juices-mixer">
+        Juices/Mixers
+    </div>
+    <div class="category glassware" id="glassware">
+        Glassware
+    </div>
+</div>
+<div class="notepad">
+    <div class="notepad-two">
+        <img src="static/images/notepad.png" alt="Notepad">
+        <div class="overlay-text"></div>
+    </div>
+</div>
+<div class="the-bottom-of-bartender">
+    <div class="trashcan col-2">
+        <img src="static/images/trashcan.png" alt="Trashcan">
+    </div>
+    <div class="coaster">
+        <div class="coaster-two">
+            <img src="static/images/coaster.png" alt="Coaster">
+        </div>
+        <div class="text-coaster">
+            <button class="serving-button">
+                Serve Drink
+            </button>
+        </div>
+    </div>
+    <div class="shaker">
+        <div class="shaker-two">
+            <img src="static/images/shaker.png" alt="Shaker">
+        </div>
+        <div class="button-container-shaker">
+            <button class="mix-button">Mix</button>
+            <button class="shake-button">Shake</button>
+        </div>
+    </div>
+</div>
 
+
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'menu-expand.js') }}"></script>
 {% endblock %}
