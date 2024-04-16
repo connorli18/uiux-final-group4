@@ -162,7 +162,8 @@ body{
 }
 
 .shaker{    
-    margin-top: -60px;
+    margin-top: -30px;
+    padding-top: 0px;
 }
 
 .shaker-two{
@@ -174,6 +175,8 @@ body{
 .shaker img{
     width: 200px;
     height: auto;
+    margin-top: -5px;
+    padding-top: -10px;
 }
 
 .button-container-shaker{
@@ -191,10 +194,21 @@ body{
 }
 
 
-.bar-items{
+.bar-item-wrapper{
     position: absolute;
     top: 340px;
     right: 90px;
+    font-size: 25px;
+}
+
+.bar-item-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bar-items{
     border: 2px solid black;
 }
 
