@@ -1,0 +1,60 @@
+/* This serves as the css file for the Final */
+/* Ensure that the background is the color wanted */
+*{
+    background-color: rgb(244, 239, 230);
+}
+
+/* Ensure that body and font is correct */
+body{
+    background-color: rgb(244, 239, 230);
+    font-family: 'Kalam';
+}
+
+/* Design the Navigation Bar */
+#nav_div{
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+} 
+.horizontal-line {
+    border-top: 1px solid black; 
+    //margin: 20px 0; 
+}
+
+/* Homepage CSS */
+#homepage_title{ 
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 35px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+}
+#homepage_information_div_1{
+    margin-top: 45px;
+    margin-bottom: 45px;
+}
+#homepage_option_title_1{ 
+    margin-top: 25px;
+    font-size: 20px;
+    color: black;
+}
+.navbar-brand {
+    color: black;
+}
+#homepage_quote_1{ 
+    margin-top: 45px;
+    font-size: 15px;
+    display: flex;
+    justify-content: left; 
+    align-items: left; 
+    color: black;
+}
+#homepage_quote_2{ 
+    font-size: 15px;
+    display: flex;
+    justify-content: right; 
+    align-items: right; 
+    color: black;
+}

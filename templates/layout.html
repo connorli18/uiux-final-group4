@@ -1,0 +1,51 @@
+<!-- This serves as the layout.html for this our Final Project -->
+<!-- Was heavy influenced by the layout.html for the midterm -->
+<!doctype html>
+
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="data:,">
+
+        <!-- jquery -->
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>  
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+
+        <!-- Font for website-->
+        <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <!-- This is the Navbar -->
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div id='nav_div'>
+                    <a class="navbar-brand" href="/">Home</a>
+                    <a class="navbar-brand" href="/drinks">Drinks</a>
+                    <a class="navbar-brand" href="/quiz">Quiz</a>
+                    <a class="navbar-brand" href="/bartender">Bartender</a>
+                </div>
+            </nav>
+            <!-- Horizontal Line -->
+            <div class="horizontal-line"></div>
+        </div> 
+
+        <!-- This is the section that we will add to with every page -->
+        <div class="container">   
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- Link to the js file -->
+        <script type="text/javascript" src="{{ url_for('static', filename = 'bar.js') }}"></script>
+
+    </body>
+</html>
