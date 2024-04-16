@@ -9,11 +9,11 @@ window.onload = function() {
         })
         .catch(error => console.error('Error:', error));
 };
-
 document.addEventListener('DOMContentLoaded', function() {
     const categories = document.querySelectorAll('.category');
     let lastClickedCategory = null;
     let box = null;
+    let nextBoxIndex = 0;  // To keep track of the box where the next item should be placed
 
     categories.forEach(category => {
         category.addEventListener('click', function() {
@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         return response.json();
                     })
                     .then(items => {
+                        
+                        let lastClickedItems = [null, null, null, null];  // To store the last clicked items
+
                         // Create a new img element for each item and append it to the box
                         items.forEach(item => {
                             const itemElement = document.createElement('img');
@@ -81,8 +84,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             // Add an event listener to the item element that changes the image source of the coaster-two div when clicked
                             // But only if the item is a glassware
-                            if (this.id === 'glassware') {
-                                itemElement.addEventListener('click', function() {
+
+                            let categoryId = this.id;
+
+                            itemElement.addEventListener('click', function() {
+                                if (categoryId !== 'glassware') {
+                                    // Add the item to the last clicked items and update the image of the corresponding box
+                                    lastClickedItems[nextBoxIndex] = item;
+                                    const boxElement = document.querySelector(`.box${nextBoxIndex + 1}`);
+                                    if (boxElement) {
+                                        const imgElement = boxElement.querySelector('img');
+                                        if (imgElement) {
+                                            imgElement.src = item;
+                                            imgElement.style.objectFit = 'contain';  // Set the width of the image
+                                            imgElement.style.height = '90%';
+                                            imgElement.style.width = '90%';  // Set the height of the image
+                                        }
+                                    }
+                            
+                                    // Update the next box index
+                                    nextBoxIndex = (nextBoxIndex + 1) % 4;
+                                } else {
                                     const coasterImg = document.querySelector('.coaster-two img');
                                     const coasterText = document.querySelector('.text-coaster');
                                     if (coasterImg) {
@@ -92,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                         coasterImg.style.objectFit = 'contain';  // Ensure that the aspect ratio of the image is maintained
                                         coasterText.style.marginTop = '30px';
                                     }
-                                });
-                            }
+                                }
+                            });
 
                             box.appendChild(itemElement);
                         });

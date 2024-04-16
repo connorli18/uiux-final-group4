@@ -94,7 +94,7 @@ body{
 
 .notepad {
     position: absolute;
-    top: 150px;
+    top: 100px;
     right: 200px;
     width: 150px;
     height: auto;
@@ -190,3 +190,32 @@ body{
     margin-left: 10px;
 }
 
+
+.bar-items{
+    position: absolute;
+    top: 340px;
+    right: 90px;
+    border: 2px solid black;
+}
+
+.row1-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row2-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 170px;
+    height: 170px;
+    border: 2px solid black;
+}
