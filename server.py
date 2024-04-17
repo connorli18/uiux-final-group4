@@ -4,6 +4,45 @@ from flask import Response, request, jsonify
 import random
 app = Flask(__name__)
 
+# Data
+quiz = [
+    {
+        "id": 1, 
+        "question": "Using the recipe for the French Martini, please name the liquor and liqueur combination in this amazing drink!",
+        "answer1": "Vodka & Chambord",
+        "answer2" : "Vodka & Triple Sec",
+        "answer3": "Gin & Chambord",
+        "answer4": "Rum & Chartreuse",
+        "correctanswer": "Vodka & Chambord"
+    },
+    {
+        "id": 2, 
+        "question": "Using the provided recipe for the Espresso Martini, how many ounces of coffee liqueur are you supposed to use to create 3 of this drink?",
+        "answer1": "1.5 oz",
+        "answer2" : "3 oz",
+        "answer3": "4.5 oz",
+        "answer4": "225 oz",
+        "correctanswer": "3 oz"
+    },
+    {
+        "id": 3, 
+        "question": "What alcohol belongs in an Espresso Martini?",
+        "answer1": "Tequila",
+        "answer2" : "Whiskey",
+        "answer3": "Coffee Liquor",
+        "answer4": "Gin",
+        "correctanswer": "Coffee Liquor"
+    },
+    {
+        "id": 4, 
+        "question": "What is the most popular drink?",
+        "answer1": "Espresso Martini",
+        "answer2" : "French Martini",
+        "answer3": "Classic Martini",
+        "answer4": "Peach Bellini",
+        "correctanswer": "Espresso Martini"
+    },
+]
 # Routes
 @app.route("/hidden")
 def hidden():
@@ -25,6 +64,34 @@ def quizPage():
 def bartenderPage():
     return render_template("bartender.html")
 
+@app.route('/quizquestion/<int:id>')                            #quizquestion Page
+def quizquestionPage(id):
+    # print(id)
+    return render_template("quizquestion.html")
+
+@app.route('/quizcomplete')                            #quizquestion Page
+def quizcompetePage():
+    return render_template("quizcomplete.html")
+
+#display Quiz Question
+@app.route("/quizquestion/quizquestion", methods=["GET", "POST"])
+def quizquestion():
+    global quiz
+    id = request.get_json()
+    quizquestion_results = []
+    print("Hello hello" + str(id))  #error checking
+
+    # find the name in the mideterrean_food data
+    for question in quiz:
+        if question["id"] == int(id):
+            quizquestion_results.append(question)
+
+    # print(foodpage_results) # error checking
+    # print(homepage_results) Used to check if correct data is sending back
+    if len(quizquestion_results) != 0:
+        return jsonify(question=quizquestion_results)
+    else:
+        return jsonify("Question Display Failed")
 
 @app.route('/get-bar-items')
 def get_items():

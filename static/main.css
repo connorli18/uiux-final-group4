@@ -59,6 +59,58 @@ body{
     color: black;
 }
 
+/* Quizpage CSS */
+#quizpage_title{ 
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 35px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+}
+#quizpage_description_1{ 
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 20px;
+    display: flex;
+    justify-content: left; 
+    align-items: left; 
+    color: black;
+}
+#quizpage_startbutton_1{ 
+    margin-top: 45px;
+    margin-bottom: 45px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+#quizpage_question_1{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 25px;
+    display: flex;
+    justify-content: left; 
+    align-items: left; 
+    color: black;
+}
+#horizontal-line-quiz{
+    border-top: 1px solid black; 
+    margin-top: 50px;  
+    margin-bottom: 30px;  
+}
+#quizcomplete_score{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 35px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+}
+
+
+
 .items-menu{
     margin-top: 175px;
     margin-bottom: 45px;
