@@ -583,7 +583,6 @@ pourIntoGlassButton.addEventListener('mousedown', function() {
 });
 
 // Stop pouring when the mouse button is released or leaves the button
-pourIntoGlassButton.addEventListener('mouseup', endPour);
 pourIntoGlassButton.addEventListener('mouseleave', endPour);
 
 function endPour() {
