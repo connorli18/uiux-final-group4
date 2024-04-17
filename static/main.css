@@ -112,7 +112,7 @@ body{
 
 
 .items-menu{
-    margin-top: 175px;
+    margin-top: 130px;
     margin-bottom: 45px;
     font-size: 35px;
     justify-content: center; 
@@ -219,6 +219,7 @@ body{
 }
 
 .shaker-two{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,4 +285,32 @@ body{
     width: 170px;
     height: 170px;
     border: 2px solid black;
+}
+
+.button-container-two{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.score-title{
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+.score-display{
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
 }

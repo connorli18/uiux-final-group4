@@ -1,8 +1,12 @@
 from flask import Flask
 from flask import render_template 
 from flask import Response, request, jsonify
+from flask import sessions
 import random
+
+
 app = Flask(__name__)
+app.secret_key = 'super secret key'
 
 # Data
 quiz = [
@@ -103,6 +107,7 @@ def get_items():
         'syrups': ['static/images/syrups/simple.png'],
         'juices-mixer': ['static/images/juices-mixer/espresso.png', 'static/images/juices-mixer/pineapple.png', 'static/images/juices-mixer/peach.png'],
         'glassware': ['static/images/glassware/coupe.png', 'static/images/glassware/martini.png', 'static/images/glassware/flute.png'],
+        'ice': ['static/images/ice/ice.png']
     }
 
     return jsonify(image_list[category])
