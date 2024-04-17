@@ -1,8 +1,12 @@
 from flask import Flask
 from flask import render_template 
 from flask import Response, request, jsonify
+from flask import sessions
 import random
+
+
 app = Flask(__name__)
+app.secret_key = 'super secret key'
 
 # Routes
 @app.route("/hidden")
