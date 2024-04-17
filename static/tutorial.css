@@ -1,0 +1,25 @@
+.instruction-box {
+    border: 2px solid #ccc;
+    /* Border for the box */
+    padding: 20px;
+    /* Padding to create space between text and border */
+    text-align: center;
+    /* Center-align the text content */
+    margin: 20px auto;
+    /* Center the box horizontally */
+}
+
+.instruction-box button {
+    margin-top: 10px;
+    /* Add space between the box and the buttons */
+}
+
+.click-me {
+    border: 3px solid red;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    /* Adds a red shadow */
+    transform: scale(1.05);
+    /* Slightly increases the size */
+    transition: all 0.3s ease;
+    /* Adds smooth transition effect */
+}

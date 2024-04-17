@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template 
 from flask import Response, request, jsonify
 from flask import sessions
+from instructions import instructions
+
 import random
 
 
@@ -120,7 +122,11 @@ def get_items():
 @app.route('/random-drink')
 def random_drinks():
     drinks = ['Classic Martini', 'French Martini', 'Peach Bellini', 'Espresso Martini']
-    return jsonify({'drink': random.choice(drinks)})
+    chosen = random.choice(drinks)
+    return jsonify({'drink': chosen,
+'TELLMEWHATTODOICANTTHINKFORMYSELF': instructions[chosen]
+    
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

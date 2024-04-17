@@ -1,3 +1,6 @@
+let instructions = null; // Declare temp globally
+let currentCategory = 0;
+let currentStep = 0;
 window.onload = function () {
     fetch('/random-drink')
         .then(response => response.json())
@@ -5,6 +8,9 @@ window.onload = function () {
             var overlayText = document.querySelector('.overlay-text');
             if (overlayText) {
                 overlayText.innerText = data.drink;
+                instructions = data.TELLMEWHATTODOICANTTHINKFORMYSELF;
+                console.log("instr", instructions);
+                displayInstruction(currentCategory, currentStep);
             }
         })
         .catch(error => console.error('Error:', error));
@@ -583,6 +589,7 @@ pourIntoGlassButton.addEventListener('mousedown', function () {
 });
 
 // Stop pouring when the mouse button is released or leaves the button
+pourIntoGlassButton.addEventListener('mouseup', endPour);
 pourIntoGlassButton.addEventListener('mouseleave', endPour);
 
 function endPour() {
@@ -618,3 +625,103 @@ function endPour() {
 document.querySelector('.serving-button').addEventListener('click', function () {
     window.location.href = '/result';
 });
+
+
+
+
+//Nguyen's part
+function addEventToButtons(backBtn, nextBtn, instructionDiv) {
+
+    // Event listeners for navigation buttons
+    backBtn.on('click', () => {
+        chilling(currentCategory);
+        if (currentStep > 0) {
+            currentStep--;
+            displayInstruction(currentCategory, currentStep);
+            nextBtn.disabled = false;
+        } else if (currentCategory > 0) {
+            currentCategory--;
+            currentStep = instructions[currentCategory].length - 1;
+            displayInstruction(currentCategory, currentStep);
+            nextBtn.disabled = false;
+        }
+        if (currentStep === 0 && currentCategory === 0) {
+            backBtn.disabled = true;
+        }
+    });
+
+    nextBtn.on('click', () => {
+        chilling(currentCategory);
+        if (currentStep < instructions[currentCategory].length - 1) {
+            currentStep++;
+            displayInstruction(currentCategory, currentStep);
+            backBtn.disabled = false;
+        } else if (currentCategory < instructions.length - 1) {
+            currentCategory++;
+            //TODO: here we should call the highlight function for next category
+            popping(currentCategory);
+            currentStep = 0;
+            displayInstruction(currentCategory, currentStep);
+            backBtn.disabled = false;
+        }
+        if (currentStep === instructions[currentCategory].length - 1 && currentCategory === instructions.length - 1) {
+            nextBtn.disabled = true;
+            instructionDiv.text("You have completed the tutorial! Click 'Home' button to explore more.");
+        }
+    });
+}
+
+
+//function to pop the shit out of the categorires
+function popping(index) {
+    myCategories = ["glassware", "liquors", "liqueurs", "syrups", "juices-mixer"]
+    let currentCategory = $(`#${myCategories[index]}`);
+    currentCategory.addClass('click-me');
+
+}
+
+function chilling(index) {
+    console.log("heel");
+    myCategories = ["glassware", "liquors", "liqueurs", "syrups", "juices-mixer"]
+    let currentCategory = $(`#${myCategories[index]}`);
+    console.log(currentCategory.text());
+    currentCategory.removeClass('click-me');
+
+}
+
+function finish_tutorial() {
+
+}
+
+// Function to display current instruction
+function displayInstruction(categoryIndex, stepIndex) {
+    let container = $('#draft');
+    container.empty();
+    let instructionDiv = $('<div></div>');
+
+
+    let backButton = $('<button>Back</button>');
+    console.log(categoryIndex, instructions.length);
+    let instructionText = $('<p></p>').text(instructions[categoryIndex][stepIndex]);
+    let nextButton = $('<button>Next</button>');
+    addEventToButtons(backButton, nextButton, instructionText);
+
+    let buttonContainer = $('<div></div>');
+    buttonContainer.append(backButton, nextButton);
+
+
+
+    // Append the elements to the new <div> element
+    // instructionDiv.append(backButton, instructionText, nextButton);
+    instructionDiv.append(buttonContainer, instructionText);
+    container.append(instructionDiv);
+
+    if (categoryIndex === 0 && stepIndex === 0) {
+        popping(0);
+        backButton.disabled = true;
+    }
+
+}
+
+// Initial instruction display
+displayInstruction(currentCategory, currentStep);
