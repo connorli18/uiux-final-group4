@@ -131,6 +131,7 @@ function quizcompletePage(){
     final_score = quiz_score + "/4"; 
     $("#quizcomplete_score").append(final_score);
     quiz_score = 0;
+    localStorage.setItem('quiz_score', quiz_score);
 
 }
 
