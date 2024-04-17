@@ -97,6 +97,10 @@ def quizquestion():
     else:
         return jsonify("Question Display Failed")
 
+@app.route('/result')                                    
+def resultPage():
+    return render_template("result.html")
+
 @app.route('/get-bar-items')
 def get_items():
     category = request.args.get('category', default = '*', type = str)
