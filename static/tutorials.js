@@ -1,6 +1,8 @@
 let instructions = null; // Declare temp globally
 let currentCategory = 0;
 let currentStep = 0;
+let globalTxtButton = null; // will store next button later
+
 window.onload = function () {
     fetch('/random-drink')
         .then(response => response.json())
@@ -19,10 +21,10 @@ window.onload = function () {
 let box = null;
 let draggedItem = null;
 let glasspicked = false;
+let lastClickedCategory = null;
 
 document.addEventListener('DOMContentLoaded', function () {
     const categories = document.querySelectorAll('.category');
-    let lastClickedCategory = null;
     let nextBoxIndex = 0;  // To keep track of the box where the next item should be placed
 
     categories.forEach(category => {
@@ -73,12 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                         return response.json();
                     })
-                    .then(items => {
+                    .then(items => {  // items is an array of image URLs
 
                         let lastClickedItems = [null, null, null, null];  // To store the last clicked items
 
                         // Create a new img element for each item and append it to the box
-                        items.forEach(item => {
+                        items.forEach((item, index) => {
                             const itemElement = document.createElement('img');
                             itemElement.src = item;
 
@@ -98,6 +100,54 @@ document.addEventListener('DOMContentLoaded', function () {
                             let categoryId = this.id;
 
                             itemElement.addEventListener('click', function () {
+                                //each img now knows what should be clicked on this step
+                                console.log("instr for curr categories", instructions[currentCategory]);
+                                correctIndex = instructions[currentCategory][instructions[currentCategory].length - 1];
+                                console.log("correct index", correctIndex);
+                                if (index === correctIndex) {
+                                    // Perform the desired action for the correct choice
+                                    //trigger next button !
+                                    globalTxtButton.click();
+                                    console.log('Correct choice clicked!', index);
+                                } else {
+                                    // add event listenr for this itemElement
+                                    // the EL should prevent the user from clicking on the wrong item
+                                    //it can do so by adding a hover effect or a click effect
+                                    // to inform user that it's wrong choice
+                                    const event = window.event || arguments[0];
+                                    const mouseX = event.clientX;
+                                    const mouseY = event.clientY;
+                                    console.log('Wrong choice clicked!', index);
+                                    // Add a timeout to revert the border color after a short delay
+                                    setTimeout(() => {
+                                        itemElement.style.borderColor = ''; // Reset border color
+                                    }, 1000); // Change back after 1 second (adjust duration as needed)
+
+                                    const messageElement = document.createElement('div');
+                                    messageElement.textContent = 'Incorrect choice!';
+                                    messageElement.style.position = 'absolute';
+                                    messageElement.style.top = '50px'; // Adjust the position as needed
+                                    messageElement.style.left = '50px'; // Adjust the position as needed
+                                    messageElement.style.color = 'red';
+                                    messageElement.style.border = '2px solid black';
+                                    messageElement.style.position = 'fixed'; // Set position to fixed to position it relative to the viewport
+                                    messageElement.style.top = `${mouseY}px`; // Set the top position to the mouse Y coordinate
+                                    messageElement.style.left = `${mouseX}px`; // Set the left position to the mouse X coordinate
+                                    messageElement.style.zIndex = '9999'; // Set a high z-index value to ensure it appears on top
+
+
+                                    // Append the message element to the document body
+                                    document.body.appendChild(messageElement);
+                                    console.log("message", messageElement);
+                                    setTimeout(() => {
+                                        // Remove the message element from the DOM
+                                        document.body.removeChild(messageElement);
+                                    }, 1000); // 2000 milliseconds = 2 seconds
+
+                                }
+
+
+
                                 if (categoryId !== 'glassware') {
 
                                     // Find the first boxElement that has a placeholder image
@@ -652,7 +702,20 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
 
     nextBtn.on('click', () => {
         chilling(currentCategory);
-        if (currentStep < instructions[currentCategory].length - 1) {
+        //now find lastClickedCat and remove active
+        if (lastClickedCategory) {
+            lastClickedCategory.classList.remove('active'); // Remove the 'active' class from the last clicked category
+            lastClickedCategory = null; // Reset the last clicked category
+        }
+        if (box) {
+            //remove if this is the last step in current category
+            if (currentStep >= instructions[currentCategory].length - 2) {
+                box.remove();
+                box = null;
+            }
+        }
+        if (currentStep < instructions[currentCategory].length - 2) {  //after we add idx, should be  -2
+            //curr step can +1 when it's <= thirdt last. After + => it's 2nd last and that's it.
             currentStep++;
             displayInstruction(currentCategory, currentStep);
             backBtn.disabled = false;
@@ -681,7 +744,6 @@ function popping(index) {
 }
 
 function chilling(index) {
-    console.log("heel");
     myCategories = ["glassware", "liquors", "liqueurs", "syrups", "juices-mixer"]
     let currentCategory = $(`#${myCategories[index]}`);
     console.log(currentCategory.text());
@@ -705,6 +767,7 @@ function displayInstruction(categoryIndex, stepIndex) {
     let instructionText = $('<p></p>').text(instructions[categoryIndex][stepIndex]);
     let nextButton = $('<button>Next</button>');
     addEventToButtons(backButton, nextButton, instructionText);
+    globalTxtButton = nextButton;
 
     let buttonContainer = $('<div></div>');
     buttonContainer.append(backButton, nextButton);
