@@ -19,7 +19,8 @@ quiz = [
         "answer2" : "Vodka & Triple Sec",
         "answer3": "Gin & Chambord",
         "answer4": "Rum & Chartreuse",
-        "correctanswer": "Vodka & Chambord"
+        "correctanswer": "Vodka & Chambord",
+        "description": "Vodka and Chambord is the correct combination of things to make the French Martini, which was not actually invented in France but is a product of the 1980s NYC Cocktail Scene!",
     },
     {
         "id": 2, 
@@ -28,7 +29,8 @@ quiz = [
         "answer2" : "3 oz",
         "answer3": "4.5 oz",
         "answer4": "225 oz",
-        "correctanswer": "3 oz"
+        "correctanswer": "3 oz",
+        "description": "Remember that the recipe for the Espresso Martini contains 1 oz of coffee liqueur per drink! Thus, if you have 3 drinks, you would require 3 oz of coffee liqueur total",
     },
     {
         "id": 3, 
@@ -37,16 +39,18 @@ quiz = [
         "answer2" : "Whiskey",
         "answer3": "Coffee Liquor",
         "answer4": "Gin",
-        "correctanswer": "Coffee Liquor"
+        "correctanswer": "Coffee Liquor",
+        "description": "Remember that Coffee Liquor is a main ingredient in an Espresso Martini",
     },
     {
         "id": 4, 
-        "question": "What is the most popular drink?",
+        "question": "What is the most popular cocktail?",
         "answer1": "Espresso Martini",
         "answer2" : "French Martini",
         "answer3": "Classic Martini",
         "answer4": "Peach Bellini",
-        "correctanswer": "Espresso Martini"
+        "correctanswer": "Espresso Martini",
+        "description": "Espresso Martini is the second most popular cocktail! Right after a Old Fashioned."
     },
 ]
 # Routes

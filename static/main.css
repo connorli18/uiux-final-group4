@@ -69,6 +69,15 @@ body{
     align-items: center; 
     color: black;
 }
+#quizpage_title_2{ 
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+}
 #quizpage_description_1{ 
     margin-top: 45px;
     margin-bottom: 45px;
@@ -88,10 +97,19 @@ body{
 #quizpage_question_1{
     margin-top: 45px;
     margin-bottom: 45px;
-    font-size: 25px;
+    font-size: 20px;
     display: flex;
-    justify-content: left; 
-    align-items: left; 
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+}
+#quizpage_answer_1{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
     color: black;
 }
 #horizontal-line-quiz{
@@ -99,16 +117,48 @@ body{
     margin-top: 50px;  
     margin-bottom: 30px;  
 }
-#quizcomplete_score{
+#quizcomplete_description_1{
     margin-top: 45px;
     margin-bottom: 45px;
-    font-size: 35px;
+    font-size: 20px;
     display: flex;
     justify-content: center; 
     align-items: center; 
     color: black;
 }
-
+#quizcomplete_buttons_div{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    color: black;
+}
+#quizcomplete_button_a{
+    margin-top: 45px;
+    margin-bottom: 45px;
+    margin-right: 45px;
+    margin-left: 45px;
+}
+.answer-btn{
+    width: 300px;
+}
+#answer-div{
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+#final-div{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+.nav_btn{
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-left: 40px;
+}
 
 
 .items-menu{

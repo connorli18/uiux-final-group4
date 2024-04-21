@@ -1,5 +1,3 @@
-var quiz_score = localStorage.getItem('quiz_score') || 0; // Retrieve quiz score from localStorage or set to 0 if not available
-
 // Function to set up the quiz question
 function quizquestionPage(id){
 
@@ -45,8 +43,10 @@ function displayQuizquestionPage(question_data){
     let answer4 = questionObj.answer4;
     let correctanswer = questionObj.correctanswer;
     let id = questionObj.id;
-
-    console.log(question);
+    let description = questionObj.description;
+    
+    // console.log(description);        // Error Checking
+    // console.log(question);           // Error Checking
     
     // Add the question to the div
     let row_1 = $("<div class='row'>");
@@ -57,19 +57,27 @@ function displayQuizquestionPage(question_data){
     
     // Add answers
     let row_2 = $("<div class='row'>");
-    let div_question_col_12_2 = $("<div class='col-md-12 col-sm-12'>");     //Create div in row for info
-    let answer_button_1 = $("<a class='btn btn-outline-dark btn-lg btn-block' role='button'></a>");
-    let answer_button_2 = $("<a class='btn btn-outline-dark btn-lg btn-block' role='button'></a>");
-    let answer_button_3 = $("<a class='btn btn-outline-dark btn-lg btn-block' role='button'></a>");
-    let answer_button_4 = $("<a class='btn btn-outline-dark btn-lg btn-block' role='button'></a>");
+    let div_question_col_12_2 = $("<div class='col-md-12 col-sm-12'>");     
+    let answer_div_1 = $("<div id='answer-div' class='container'>");
+    let answer_div_2 = $("<div id='answer-div' class='container'>");
+    let answer_div_3 = $("<div id='answer-div' class='container'>");
+    let answer_div_4 = $("<div id='answer-div' class='container'>");
+    let answer_button_1 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_2 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_3 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_4 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
     $(answer_button_1).append(answer1); 
     $(answer_button_2).append(answer2); 
-    $(answer_button_3).append(answer3); 
+    $(answer_button_3).append(answer3);
     $(answer_button_4).append(answer4); 
-    $(div_question_col_12_2).append(answer_button_1);
-    $(div_question_col_12_2).append(answer_button_2);
-    $(div_question_col_12_2).append(answer_button_3);
-    $(div_question_col_12_2).append(answer_button_4);
+    $(answer_div_1).append(answer_button_1);
+    $(answer_div_2).append(answer_button_2);
+    $(answer_div_3).append(answer_button_3);
+    $(answer_div_4).append(answer_button_4);
+    $(div_question_col_12_2).append(answer_div_1);
+    $(div_question_col_12_2).append(answer_div_2);
+    $(div_question_col_12_2).append(answer_div_3);
+    $(div_question_col_12_2).append(answer_div_4);
     $(row_2).append(div_question_col_12_2);
     $("#quizpage_answer_1").append(row_2);   
     
@@ -84,13 +92,21 @@ function displayQuizquestionPage(question_data){
         if (selectedAnswer === correctanswer) {
             // Output correct response
             console.log("Correct answer response");
-            quiz_score++;
-            localStorage.setItem('quiz_score', quiz_score); // Update quiz score in localStorage
-            console.log(quiz_score);
-            
+            let row_3 = $("<div class='row'>");
+            let correct_div_1 = $("<div id='correct-div' style='border: 2px solid green; color: green; padding: 10px;' class='container'>");
+            result = "Correct! " + description;
+            $(correct_div_1).append(result);
+            $(row_3).append(correct_div_1);
+            $("#quizpage_feedback_1").append(row_3);   
         } else {
             // Output wrong response
             console.log("Wrong answer response");
+            let row_3 = $("<div class='row'>");
+            let wrong_div_1 = $("<div id='wrong-div' style='border: 2px solid red; color: red; padding: 10px;' class='container'>");
+            result = "Incorrect! " + description;
+            $(wrong_div_1).append(result);
+            $(row_3).append(wrong_div_1);
+            $("#quizpage_feedback_1").append(row_3);   
         }
     });
 
@@ -104,8 +120,9 @@ function displayQuizquestionPage(question_data){
 
     let row_3 = $("<div class='row'>");
     let div_question_col_12_3 = $("<div class='col-md-12 col-sm-12'>");     //Create div in row for info
-    let prev_button_1 = $("<a class='btn btn-outline-dark btn-lg' role='button'><-</a>");
-    let next_button_1 = $("<a class='btn btn-outline-dark btn-lg' role='button'>-></a>");
+    let final_div_1 = $("<div id='final-div' class='container'>");
+    let prev_button_1 = $("<a class='btn btn-outline-dark btn-lg nav_btn' role='button'><-</a>");
+    let next_button_1 = $("<a class='btn btn-outline-dark btn-lg nav_btn' role='button'>-></a>");
         
     if (prev_id == 0 && next_id == 2){
         $(prev_button_1).attr('href', '/quiz');
@@ -117,21 +134,11 @@ function displayQuizquestionPage(question_data){
         $(prev_button_1).attr('href', prev_href);
         $(next_button_1).attr('href', next_href);
     }
-    $(div_question_col_12_3).append(prev_button_1);
-    $(div_question_col_12_3).append(next_button_1);
+    $(final_div_1).append(prev_button_1);
+    $(final_div_1).append(next_button_1);
+    $(div_question_col_12_3).append(final_div_1);
     $(row_3).append(div_question_col_12_3);
     $("#quizpage_nextbutton_1").append(row_3); 
-
-}
-
-function quizcompletePage(){
-    console.log(quiz_score); 
-
-    localStorage.setItem('quiz_score', quiz_score);
-    final_score = quiz_score + "/4"; 
-    $("#quizcomplete_score").append(final_score);
-    quiz_score = 0;
-    localStorage.setItem('quiz_score', quiz_score);
 
 }
 
@@ -139,7 +146,6 @@ $(document).ready(function(){
 
     //strings depends on the search
     let quiz_str = "quizquestion"; 
-    let quiz_complete_str = "quizcomplete"; 
 
     // Get the query parameter from the URL from the search
     const search_query_string = window.location.href;
@@ -154,8 +160,5 @@ $(document).ready(function(){
         console.log("Hello" + id);    //error checking
         quizquestionPage(id);
         // console.log("Hello from else if");    //error checking
-    }else if (search_query_string.includes(quiz_complete_str)){
-        quizcompletePage();
     }
-
 });
