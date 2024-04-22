@@ -786,5 +786,7 @@ function displayInstruction(categoryIndex, stepIndex) {
 
 }
 
+
+
 // Initial instruction display
 displayInstruction(currentCategory, currentStep);

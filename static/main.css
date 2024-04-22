@@ -18,7 +18,7 @@ body{
 } 
 .horizontal-line {
     border-top: 1px solid black; 
-    //margin: 20px 0; 
+    margin: 20px 0; 
 }
 
 /* Homepage CSS */
@@ -162,8 +162,8 @@ body{
 
 
 .items-menu{
-    margin-top: 130px;
-    margin-bottom: 45px;
+    margin-top: 250px;
+    margin-bottom: 0px;
     font-size: 35px;
     justify-content: center; 
     align-items: center; 
@@ -173,7 +173,7 @@ body{
 }
 
 .active {
-    background-color: #6a94c8;  // Change this to the color you want
+    background-color: #6a94c8;  
 }
 
 .category{
@@ -197,7 +197,7 @@ body{
 .notepad {
     position: absolute;
     top: 100px;
-    right: 200px;
+    right: 1130px;
     width: 150px;
     height: auto;
 }
@@ -222,6 +222,7 @@ body{
 }
 
 .trashcan {
+    margin-top: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,6 +238,7 @@ body{
 }
 
 .coaster{
+    margin-top: -35px;
     padding-right: 80px;
     padding-left: 50px;
 }
@@ -264,7 +266,7 @@ body{
 }
 
 .shaker{    
-    margin-top: -30px;
+    margin-top: -100px;
     padding-top: 0px;
 }
 
@@ -346,7 +348,7 @@ body{
 
 
 .score-title{
-    padding-top: 60px;
+    padding-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -356,11 +358,88 @@ body{
 }
 
 .score-display{
-    padding: 25px;
+    padding-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+#clock {
+    position: absolute;
+    top: 150px;
+    right: 200px;
+    width: 150px;
+    font-size: 2em;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.image-with-caption::after {
+    content: attr(title);
+    display: block;
+    text-align: center;
+}
+
+.feedback-title{
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    font-size: 25px;
+
+}
+
+.feedback{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+    font-size: 16px;
+}
+
+.image-martini{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-martini img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: auto;
+}
+
+
+.button-holders-butthole{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 25px;
+    padding-top: 40px;
+    padding-bottom: 50px;
+}
+
+#butth-1, #butth-2 {
+    margin-right: 40px;
+    margin-left: 40px;
+    padding: 10px 20px;  /* Increase the size of the buttons */
+    font-size: 20px;  /* Increase the size of the text */
+    border: 2px solid black;  /* Initial border color */
+    color: black;  /* Initial text color */
+    transition: all 0.3s ease;  /* Smooth transition */
+    
+    
+}
+
+#butth-1:hover, #butth-2:hover {
+    border-color: rgb(77, 162, 54);  /* Border color when hovered */
+    color: rgb(77, 162, 54);   /* Text color when hovered */
 }

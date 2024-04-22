@@ -8,6 +8,8 @@ window.onload = function () {
             }
         })
         .catch(error => console.error('Error:', error));
+
+    displayTimer();
 };
 
 let box = null;
@@ -46,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Set the box's style properties
                 box.style.position = 'absolute';
                 box.style.top = '130px';
-                box.style.right = '420px';
-                box.style.width = '700px';
+                box.style.right = '480px';
+                box.style.width = '600px';
                 box.style.height = '150px';
                 box.style.backgroundColor = 'transparent';
                 box.style.zIndex = '1000';
@@ -73,18 +75,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         // Create a new img element for each item and append it to the box
                         items.forEach(item => {
+                            const figureElement = document.createElement('figure');
                             const itemElement = document.createElement('img');
+                            const captionElement = document.createElement('figcaption');
+
+                            let imgName = item.split('/').pop();
                             itemElement.src = item;
+                            itemElement.title = imgName;
+
+                            let dictionary = {
+                                "vodka.png" : "Vodka",
+                                "gin.png" : "Gin",
+                                "champagne.png" : "Champagne",
+                                "coffee.png" : "Coffee Liqueur",
+                                "chambord.png" : "Chambord",
+                                "triplesec.png" : "Triple Sec",
+                                "simple.png" : "Simple Syrup",
+                                "espresso.png" : "Espresso",
+                                "pineapple.png" : "Pineapple Juice",
+                                "peach.png" : "Peach Juice",
+                                "coupe.png" : "Coupe Glass",
+                                "martini.png" : "Martini Glass",
+                                "flute.png" : "Flute Glass",
+                                "vermouth.png" : "Vermouth"
+                            };
+
+                            let displayName = dictionary[imgName];
+                            captionElement.innerText = displayName ? displayName : imgName;
+                            captionElement.style.textAlign = 'center';
+                            captionElement.style.paddingLeft = '20px';
+                            captionElement.style.paddingTop = '10px';
 
                             // Apply some styles to the item element
                             itemElement.style.marginRight = '20px';
-                            itemElement.style.marginLeft = '100px';
+                            itemElement.style.marginLeft = '45px';
                             itemElement.style.marginTop = '10px';
-                            itemElement.style.marginBottom = '10px';
-                            itemElement.style.padding = '10px';
+                            itemElement.style.marginBottom = '0px';
+                            itemElement.style.padding = '0px';
                             itemElement.style.width = 'auto';  // Change this to make each item take up 1/3 of the box
                             itemElement.style.objectFit = 'scale-down';  // Change this to keep the aspect ratio of the images
-                            itemElement.style.height = 'auto';
+                            itemElement.style.height = '90px';
+
+                            figureElement.appendChild(itemElement);
+                            figureElement.appendChild(captionElement);
+                            figureElement.style.display = 'flex';
+                            figureElement.style.flexDirection = 'column';
+                            figureElement.style.alignItems = 'center';
+                            figureElement.style.marginRight = '20px';
+                            figureElement.style.marginLeft = '20px';
 
                             // Add an event listener to the item element that changes the image source of the coaster-two div when clicked
                             // But only if the item is a glassware
@@ -130,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                             boxElement.style.position = 'relative';
 
+
                                             const pourButton = document.createElement('button');
                                             pourButton.style.fontSize = '20px';
                                             pourButton.textContent = 'Pour';
@@ -140,9 +179,17 @@ document.addEventListener('DOMContentLoaded', function () {
                                             pourButton.style.transform = 'translate(-50%, -50%)';  // Ensure the button is centered
                                             boxElement.appendChild(pourButton);
 
+                                            // Placeholder image source
+                                            const placeholderSrc = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
                                             // Show the "pour" button when the image is hovered over
                                             boxElement.addEventListener('mouseover', function () {
-                                                pourButton.style.display = 'block';
+                                                if (imgElement.src == placeholderSrc) {
+                                                    pourButton.style.display = 'none';
+                                                }
+                                                else {
+                                                    pourButton.style.display = 'block';
+                                                }
                                             });
 
                                             // Hide the "pour" button when the mouse leaves the image
@@ -159,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                             let count = 0;  // Add a variable to keep track of the count
                                             let countInterval;  // Add a variable to keep track of the interval that updates the count
                                             let countElement;  // Add a variable to keep track of the element that displays the count
+                                            let pourHistory = {};  // Create an object to store the pour history
 
                                             // Start pouring when the "Pour" button is pressed down
                                             pourButton.addEventListener('mousedown', function () {
@@ -217,6 +265,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 countInterval = setInterval(function () {
                                                     count += 0.25;  // Increase the count by 0.25 every second
                                                     countElement.textContent = `${count.toFixed(2)} oz`;  // Update the count element with the new count
+                                                    if (pouringImage.src in pourHistory) {
+                                                        pourHistory[pouringImage.src] += 0.25;
+                                                    } else {
+                                                        pourHistory[pouringImage.src] = 0.25;
+                                                    }
                                                 }, 400);  // Update the count every second
                                             });
 
@@ -246,6 +299,24 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     clearInterval(countInterval);
                                                     countElement.remove();
                                                     count = 0;  // Reset the count
+
+                                                    // Send the pour history to a server
+                                                    fetch('/api/pour-history-ingredients', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify(pourHistory)
+                                                    }).then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Network response was not ok');
+                                                        }
+                                                        return response.json();
+                                                    }).then(data => {
+                                                        console.log('Success:', data);
+                                                    }).catch(error => {
+                                                        console.error('Error:', error);
+                                                    });
                                                 }
                                             }
 
@@ -261,11 +332,30 @@ document.addEventListener('DOMContentLoaded', function () {
                                         coasterImg.style.contain = 'scale-down';  // Keep the aspect ratio of the image
                                         coasterImg.style.paddingBottom = '50px';
                                         glasspicked = true;
+
+                                        // Send a signal to the server
+                                        fetch('/api/glass-fetched', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({glassPicked: glasspicked, imagePath: coasterImg.src})
+                                        }).then(response => {
+                                            if (!response.ok) {
+                                                throw new Error('Network response was not ok');
+                                            }
+                                            return response.json();
+                                        }).then(data => {
+                                            console.log('Success:', data);
+                                        }).catch(error => {
+                                            console.error('Error:', error);
+                                        });
+
                                     }
                                 }
                             });
 
-                            box.appendChild(itemElement);
+                            box.appendChild(figureElement);
                         });
                     })
                     .catch(e => {
@@ -312,6 +402,13 @@ if (trashcan) {
         if (itemElement) {
             itemElement.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
             itemElement.alt = "Placeholder";
+
+            // Get the parent boxElement of the itemElement
+            const boxElement = itemElement.parentElement;
+            if (boxElement) {
+                // Mark the boxElement as trashed
+                boxElement.dataset.trashed = "true";
+            }
         }
 
         // Change the background color back when the item is dropped
@@ -379,6 +476,25 @@ mixButton.addEventListener('click', function () {
         shakerImage.style.display = '';
         shakerImage.style.zIndex = '0';
     }, 3000);
+    
+    // Send a signal to the server
+    fetch('/api/pour-history-mix', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({mix: true})
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+
 });
 
 
@@ -422,6 +538,24 @@ shakeButton.addEventListener('click', function () {
         shakeButton.style.display = '';
         iceButton.style.display = '';
     }, 3000);
+
+
+    fetch('/api/pour-history-shake', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({mix: true})
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
 });
 
 
@@ -435,7 +569,7 @@ iceButton.addEventListener('click', function () {
     let iceImage = document.createElement('img');
     iceImage.src = 'static/images/ice/ice.png';
     iceImage.style.position = 'absolute';
-    iceImage.style.left = '58%';
+    iceImage.style.left = '58.7%';
     iceImage.style.top = '40%';
     iceImage.style.transform = 'translate(-50%, -50%)';
     iceImage.style.height = '120px';
@@ -477,6 +611,24 @@ iceButton.addEventListener('click', function () {
             iceButton.style.display = '';
             shakerImage.style.zIndex = '0';
         }
+    });
+
+
+    fetch('/api/pour-history-addIce', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({mix: true})
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
     });
 });
 
@@ -580,6 +732,23 @@ pourIntoGlassButton.addEventListener('mousedown', function () {
         }
         shakerImagecopy.style.transform = `translate(-50%, -50%) rotate(${-rotation}deg)`;
     }, 100);
+
+    fetch('/api/pourIntoGlass', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({pour: true})
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
 });
 
 // Stop pouring when the mouse button is released or leaves the button
@@ -613,8 +782,26 @@ function endPour() {
     }, 100);
 }
 
+let seconds = 0;
+let minutes = 0;
+
+function displayTimer() {
+    seconds++;
+    if (seconds >= 60) {
+        minutes++;
+        seconds = 0;
+    }
+    let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+    let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    let time = formattedMinutes + ':' + formattedSeconds;
+    document.getElementById('clock').innerText = time;
+    setTimeout(displayTimer, 1000);
+}
+
 
 // JavaScript
 document.querySelector('.serving-button').addEventListener('click', function () {
-    window.location.href = '/result';
+    window.location.href = '/bartender/result';
 });
+
+

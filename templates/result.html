@@ -7,7 +7,29 @@
         Hmmmmm...Delicious and Refreshing!
     </div>
     <div class="score-display">
-        Your Score is an 8/10!
+        Your Score is an {{ result | round(1) }}/10!
+    </div>
+    <div class="image-martini">
+        <img src="{{ url_for('static', filename='images/random-martini.png') }}" alt="Martini">
+    </div>
+    <div class="feedback">
+        <div class="feedback-title">
+            Feedback:
+        </div>
+        <ul>
+            {% for feedback in feedbacks[0:] %}
+                <li>{{ feedback }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="button-holders-butthole">
+        <button id="butth-1" onclick="window.location.href='/drinks'">Relearn the Drinks</button>
+        <button id="butth-2" onclick="window.location.href='/bartender'">Keep Practicing</button>
     </div>
 </div>
+{% endblock %}
+
+
+{% block scripts %}
+
 {% endblock %}

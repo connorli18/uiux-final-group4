@@ -3,7 +3,7 @@ from flask import render_template
 from flask import Response, request, jsonify
 from flask import sessions
 from instructions import instructions
-
+import json
 import random
 
 
@@ -72,6 +72,18 @@ def quizPage():
 
 @app.route('/bartender')                                #bartenderpage
 def bartenderPage():
+    global pourHistory
+    global graded_pour
+    pourHistory = {
+        "drinkName": "",
+        "glassType": "",
+        "mix": False,
+        "shake": False,
+        "addIce": False,
+        "addIce2": False,
+        "ingredients": {}
+    }
+    graded_pour = {}
     return render_template("bartender.html")
 
 @app.route('/quizquestion/<int:id>')                            #quizquestion Page
@@ -103,9 +115,110 @@ def quizquestion():
     else:
         return jsonify("Question Display Failed")
 
-@app.route('/result')                                    
+
+perfect_pour = {
+    "French Martini": {
+        "glassType": "Coupe Glass",
+        "mix": False,
+        "shake": True,
+        "addIce": True,
+        "ingredients": {
+            "Vodka": 1.5,
+            "Chambord": 0.5,
+            "Pineapple Juice": 0.75
+        }
+    },
+    "Espresso Martini": {
+        "glassType": "Coupe Glass",
+        "mix": False,
+        "shake": True,
+        "addIce": True,
+        "ingredients": {
+            "Vodka": 1.5,
+            "Coffee Liqueur": 1,
+            "Espresso": 1.5,
+            "Simple Syrup": 0.5
+        }
+    },
+    "Classic Martini": {
+        "glassType": "Martini Glass",
+        "mix": True,
+        "shake": False,
+        "addIce": True,
+        "ingredients": {
+            "Gin": 2,
+            "Dry Vermouth": 0.5
+        }
+    },
+    "Peach Bellini": {
+        "glassType": "Flute Glass",
+        "mix": True,
+        "shake": False,
+        "addIce": True,
+        "ingredients": {
+            "Peach Juice": 2,
+            "Champagne": 3
+        }
+    }
+}
+
+def calc_result():
+    global graded_pour
+    global perfect_pour
+    score = 10
+    feedback = []
+    if graded_pour == {}:
+        return 0, ["You haven't poured anything yet! Try again!"]
+    else:
+        grader = perfect_pour[graded_pour["drinkName"]]
+        if grader["glassType"] != graded_pour["glassType"]:
+            score -= 2
+            feedback.append("You used the wrong glassware!")
+        if grader["addIce"] != graded_pour["addIce"]:
+            score -= 0.2
+            feedback.append("Next time, always shake/mix with ice!")
+        if grader["mix"] != graded_pour["mix"] and grader["mix"] == True:
+            if graded_pour["shake"]:
+                score -= 1
+                feedback.append("This drink requires mixing, not shaking!")
+            else:
+                score -= 1
+                feedback.append("This drink requires mixing!")
+        if grader["shake"] != graded_pour["shake"] and grader["shake"] == True:
+            if graded_pour["mix"]:
+                score -= 1
+                feedback.append("This drink requires shaking, not mixing!")
+            else:
+                score -= 1
+                feedback.append("This drink requires shaking!")
+        if graded_pour["shake"] and graded_pour["mix"]:
+            score -= 1
+            feedback.append("Don't double dip, choose to either shake or mix the drink - never both!")
+
+        for ingredient, amount in grader["ingredients"].items():
+            if ingredient not in graded_pour["ingredients"]:
+                score -= 0.5
+                feedback.append(f"You didn't include {amount} oz of {ingredient}!")
+            elif graded_pour["ingredients"][ingredient] != amount:
+                score -= 0.3
+                feedback.append(f"You didn't include the correct amount of {ingredient}!")
+        
+        for ingredient in graded_pour["ingredients"]:
+            if ingredient not in grader["ingredients"]:
+                score -= 1.2
+                feedback.append(f"You included {ingredient} which is not in the recipe!")
+
+        random.shuffle(feedback)
+        return score, feedback
+
+
+@app.route('/bartender/result')                                    
 def resultPage():
-    return render_template("result.html")
+    result, feedbacks = calc_result()
+    if feedbacks == []:
+        feedbacks = ["Congratulations! You made a perfect pour!"]
+    result = max(0, result)
+    return render_template("result.html", result=result, feedbacks=feedbacks)
 
 @app.route('/get-bar-items')
 def get_items():
@@ -113,7 +226,7 @@ def get_items():
 
     image_list = {
         'liquors' : ['static/images/liquors/vodka.png', 'static/images/liquors/gin.png', 'static/images/liquors/champagne.png'],
-        'liqueurs' : ['static/images/liqueurs/coffee.png', 'static/images/liqueurs/chambord.png', 'static/images/liqueurs/triplesec.png'],
+        'liqueurs' : ['static/images/liqueurs/coffee.png', 'static/images/liqueurs/chambord.png', 'static/images/liqueurs/vermouth.png'],
         'syrups': ['static/images/syrups/simple.png'],
         'juices-mixer': ['static/images/juices-mixer/espresso.png', 'static/images/juices-mixer/pineapple.png', 'static/images/juices-mixer/peach.png'],
         'glassware': ['static/images/glassware/coupe.png', 'static/images/glassware/martini.png', 'static/images/glassware/flute.png'],
@@ -122,11 +235,103 @@ def get_items():
 
     return jsonify(image_list[category])
 
+pourHistory = {
+    "drinkName": "",
+    "glassType": "",
+    "mix": False,
+    "shake": False,
+    "addIce": False,
+    "addIce2": False,
+    "ingredients": {}
+}
+
+@app.route('/api/pour-history-ingredients', methods=['POST'])
+def pour_history_ingred():
+    data = request.get_json()
+    for key, value in data.items():
+        key = key.split('http://127.0.0.1:5000/')[1]
+        print(key)
+        ref_dict = {
+            "static/images/liquors/gin.png": "Gin",
+            "static/images/liquors/vodka.png": "Vodka",
+            "static/images/liquors/champagne.png": "Champagne",
+            "static/images/liqueurs/coffee.png": "Coffee Liqueur",
+            "static/images/liqueurs/chambord.png": "Chambord",
+            "static/images/liqueurs/vermouth.png": "Dry Vermouth",
+            "static/images/syrups/simple.png": "Simple Syrup",
+            "static/images/juices-mixer/espresso.png": "Espresso",
+            "static/images/juices-mixer/pineapple.png": "Pineapple Juice",
+            "static/images/juices-mixer/peach.png": "Peach Juice"
+        }
+        key = ref_dict[key]
+
+        if key in pourHistory['ingredients']:
+            pourHistory['ingredients'][key] = value
+        else:
+            pourHistory['ingredients'][key] = value
+    with open('pourHistory.json', 'w') as f:
+        json.dump(pourHistory, f)
+    print(pourHistory)  # Print the pour history
+    return jsonify({'message': 'Pour history received and stored.'})
+
+@app.route('/api/pour-history-mix', methods=['POST'])
+def pour_history_mix():
+    pourHistory['mix'] = True
+    if pourHistory["addIce2"]:
+        pourHistory['addIce'] = True
+    print(pourHistory)
+    return jsonify({'message': 'Pour history received and stored.'})
+
+@app.route('/api/pour-history-shake', methods=['POST'])
+def pour_history_shake():
+    pourHistory['shake'] = True
+    if pourHistory["addIce2"]:
+        pourHistory['addIce'] = True
+    print(pourHistory)
+    return jsonify({'message': 'Pour history received and stored.'})
+
+@app.route('/api/pour-history-addIce', methods=['POST'])
+def pour_history_addIce():
+    if not pourHistory['shake'] and not pourHistory['mix']:
+        pourHistory['addIce'] = True
+    pourHistory['addIce2'] = True
+    print(pourHistory)
+    return jsonify({'message': 'Pour history received and stored.'})
+
+graded_pour = {}
+
+@app.route('/api/pourIntoGlass', methods=['POST'])
+def pour_into_glass():
+    global graded_pour
+    graded_pour = pourHistory.copy()
+    graded_pour.pop('addIce2', None)  # Remove the 'addIce2' key
+    print(graded_pour)
+    return jsonify({'message': 'Pour history received and stored.'})
+
+
+@app.route('/api/glass-fetched', methods=['POST'])
+def glass_fetch():
+    data = request.get_json()
+    imagePath = data['imagePath']
+
+    ref_dict = {
+        'http://127.0.0.1:5000/static/images/glassware/coupe.png': 'Coupe Glass',
+        'http://127.0.0.1:5000/static/images/glassware/martini.png': 'Martini Glass',
+        'http://127.0.0.1:5000/static/images/glassware/flute.png': 'Flute Glass'
+    }
+
+    pourHistory['glassType'] = ref_dict[imagePath]
+
+    print(pourHistory)
+    return jsonify({'message': 'Pour history received and stored.'})
+
 
 @app.route('/random-drink')
 def random_drinks():
+    global pourHistory
     drinks = ['Classic Martini', 'French Martini', 'Peach Bellini', 'Espresso Martini']
     chosen = random.choice(drinks)
+    pourHistory['drinkName'] = chosen
     return jsonify({'drink': chosen,
 'TELLMEWHATTODOICANTTHINKFORMYSELF': instructions[chosen]
     
