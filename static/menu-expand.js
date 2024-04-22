@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 box.style.height = '150px';
                 box.style.backgroundColor = 'transparent';
                 box.style.zIndex = '1000';
-                box.style.border = '2px solid black';
+                box.style.border = '2px solid lightgrey';
                 box.style.display = 'flex';
                 box.style.justifyContent = 'flex-start';
                 box.style.overflowX = 'auto';
@@ -569,7 +569,7 @@ iceButton.addEventListener('click', function () {
     let iceImage = document.createElement('img');
     iceImage.src = 'static/images/ice/ice.png';
     iceImage.style.position = 'absolute';
-    iceImage.style.left = '58.7%';
+    iceImage.style.left = '58%';
     iceImage.style.top = '40%';
     iceImage.style.transform = 'translate(-50%, -50%)';
     iceImage.style.height = '120px';

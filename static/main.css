@@ -162,13 +162,13 @@ body{
 
 
 .items-menu{
-    margin-top: 250px;
+    margin-top: 230px;
     margin-bottom: 0px;
     font-size: 35px;
     justify-content: center; 
     align-items: center; 
-    color: black;
-    border: 1px solid black;
+    color:  rgb(161, 161, 161);
+    border: 1px rgb(161, 161, 161);
     padding: 0px;
 }
 
@@ -185,8 +185,8 @@ body{
     display: flex;
     justify-content: center; 
     align-items: center; 
-    color: black;
-    border: 1px solid black;
+    color: rgb(115, 115, 115);
+    border: 1px solid rgb(161, 161, 161);
     cursor: pointer; /* Changes the cursor to a hand icon when hovering over the div */
 }
 
@@ -265,6 +265,17 @@ body{
     height: auto;
 }
 
+.serving-button {
+    background-color: transparent;  /* Light green */
+    border: 2px solid #008000;  /* Green border */
+    color: #008000;  /* Green text */
+}
+
+.serving-button:active, .serving-button:hover {
+    background-color: #008000;  /* Green background */
+    color: white;  /* White text */
+}
+
 .shaker{    
     margin-top: -100px;
     padding-top: 0px;
@@ -311,10 +322,11 @@ body{
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
+    color: rgb(161, 161, 161);
 }
 
 .bar-items{
-    border: 2px solid black;
+    border: 2px solid rgb(161, 161, 161);
 }
 
 .row1-bar{
@@ -336,7 +348,7 @@ body{
     margin: 5px;
     width: 170px;
     height: 170px;
-    border: 2px solid black;
+    border: 2px solid rgb(161, 161, 161);;
 }
 
 .button-container-two{
@@ -390,7 +402,7 @@ body{
     margin-left: 30px;
     margin-bottom: 20px;
     font-size: 25px;
-
+    color: rgba(110, 105, 105, 0.706);  /* Fully opaque light grey */
 }
 
 .feedback{
@@ -398,6 +410,10 @@ body{
     margin-bottom: 20px;
     margin-left: 200px;
     font-size: 16px;
+}
+
+ul li {
+    color: rgba(159, 159, 159, 0.981);  /* Grey text */
 }
 
 .image-martini{
@@ -432,14 +448,17 @@ body{
     margin-left: 40px;
     padding: 10px 20px;  /* Increase the size of the buttons */
     font-size: 20px;  /* Increase the size of the text */
-    border: 2px solid black;  /* Initial border color */
-    color: black;  /* Initial text color */
+    border: 2px solid rgb(77, 162, 54);  /* Initial border color */
+    color:rgb(77, 162, 54);  /* Initial text color */
     transition: all 0.3s ease;  /* Smooth transition */
-    
-    
 }
 
-#butth-1:hover, #butth-2:hover {
-    border-color: rgb(77, 162, 54);  /* Border color when hovered */
-    color: rgb(77, 162, 54);   /* Text color when hovered */
+#butth1-button:active, #butth-1:hover {
+    background-color: #008000;  /* Green background */
+    color: white;  /* White text */
+}
+
+#butth2-button:active, #butth-2:hover {
+    background-color: #008000;  /* Green background */
+    color: white;  /* White text */
 }
