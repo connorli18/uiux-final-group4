@@ -49,14 +49,14 @@ body{
     display: flex;
     justify-content: left; 
     align-items: left; 
-    color: black;
+    color: rgb(170, 170, 170);
 }
 #homepage_quote_2{ 
     font-size: 15px;
     display: flex;
     justify-content: right; 
     align-items: right; 
-    color: black;
+    color: rgb(170, 170, 170);
 }
 
 /* Quizpage CSS */
