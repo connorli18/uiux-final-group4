@@ -35,7 +35,8 @@ instructions = {
         ],
         # Syrups
         [
-            "Optional, but you can add 1/2 oz (15 ml) of syrup if you like.", 0
+            "Optional, but you can add some syrup if you like.",
+            "If that's the case, don't over more than 1/2 oz (15 ml)!", 0
         ],
         # Juices/Mixers
         [
@@ -60,7 +61,8 @@ instructions = {
             "Add 2 oz (60 ml) of peach purée or your favorite syrup",0
         ],
         # Juices/Mixers
-        ["Optional juice/mixer: 1/2 oz (15 ml) of peach juice.",2]
+        ["Optional juice/mixer: you could add some tropical (ideally peach) juice.",
+        "Add around 1/2 oz (15 ml) of juice", 2]
     ],
 
     'Espresso Martini': [

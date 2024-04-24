@@ -53,13 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Set the box's style properties
                 box.style.position = 'absolute';
-                box.style.top = '130px';
-                box.style.right = '420px';
+                box.style.top = '160px';
+                box.style.right = '400px';
                 box.style.width = '700px';
                 box.style.height = '150px';
                 box.style.backgroundColor = 'transparent';
                 box.style.zIndex = '1000';
-                box.style.border = '2px solid black';
+                box.style.border = '2px solid lightgrey';
                 box.style.display = 'flex';
                 box.style.justifyContent = 'flex-start';
                 box.style.overflowX = 'auto';
@@ -98,12 +98,16 @@ document.addEventListener('DOMContentLoaded', function () {
                             // But only if the item is a glassware
 
                             let categoryId = this.id;
+                            correctIndex = instructions[currentCategory][instructions[currentCategory].length - 1];
+                            if (index === correctIndex) {
+                                itemElement.style.border = '2px solid red';
+                            }
 
                             itemElement.addEventListener('click', function () {
                                 //each img now knows what should be clicked on this step
-                                console.log("instr for curr categories", instructions[currentCategory]);
-                                correctIndex = instructions[currentCategory][instructions[currentCategory].length - 1];
-                                console.log("correct index", correctIndex);
+                                // console.log("instr for curr categories", instructions[currentCategory]);
+                                // correctIndex = instructions[currentCategory][instructions[currentCategory].length - 1];
+                                // console.log("correct index", correctIndex);
                                 if (index === correctIndex) {
                                     // Perform the desired action for the correct choice
                                     //trigger next button !
@@ -143,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         // Remove the message element from the DOM
                                         document.body.removeChild(messageElement);
                                     }, 1000); // 2000 milliseconds = 2 seconds
-
+                                    return;
                                 }
 
 
@@ -691,7 +695,7 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
             nextBtn.disabled = false;
         } else if (currentCategory > 0) {
             currentCategory--;
-            currentStep = instructions[currentCategory].length - 1;
+            currentStep = instructions[currentCategory].length - 2;
             displayInstruction(currentCategory, currentStep);
             nextBtn.disabled = false;
         }
@@ -714,7 +718,13 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
                 box = null;
             }
         }
-        if (currentStep < instructions[currentCategory].length - 2) {  //after we add idx, should be  -2
+
+        if (currentStep === instructions[currentCategory].length - 2 && currentCategory === instructions.length - 1) {
+            nextBtn.disabled = true;
+            console.log("You have completed the tutorial! or 'Quiz' to test your knowledge!");
+            instructionDiv.text("You have completed the tutorial! Click 'Home' button to explore more ");
+        }
+        else if (currentStep < instructions[currentCategory].length - 2) {  //after we add idx, should be  -2
             //curr step can +1 when it's <= thirdt last. After + => it's 2nd last and that's it.
             currentStep++;
             displayInstruction(currentCategory, currentStep);
@@ -727,10 +737,7 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
             displayInstruction(currentCategory, currentStep);
             backBtn.disabled = false;
         }
-        if (currentStep === instructions[currentCategory].length - 1 && currentCategory === instructions.length - 1) {
-            nextBtn.disabled = true;
-            instructionDiv.text("You have completed the tutorial! Click 'Home' button to explore more.");
-        }
+
     });
 }
 
@@ -751,12 +758,20 @@ function chilling(index) {
 
 }
 
-function finish_tutorial() {
-
-}
 
 // Function to display current instruction
 function displayInstruction(categoryIndex, stepIndex) {
+
+
+    document.addEventListener('keydown', function (event) {
+        if (event.keyCode === 39) {
+            nextButton.click();
+            boxHiglight(0);
+        }
+        else if (event.keyCode === 37) {
+            backButton.click();
+        }
+    });
     let container = $('#draft');
     container.empty();
     let instructionDiv = $('<div></div>');
@@ -765,6 +780,8 @@ function displayInstruction(categoryIndex, stepIndex) {
     let backButton = $('<button>Back</button>');
     console.log(categoryIndex, instructions.length);
     let instructionText = $('<p></p>').text(instructions[categoryIndex][stepIndex]);
+    instructionText.css('font-size', '25px');
+
     let nextButton = $('<button>Next</button>');
     addEventToButtons(backButton, nextButton, instructionText);
     globalTxtButton = nextButton;
@@ -776,7 +793,7 @@ function displayInstruction(categoryIndex, stepIndex) {
 
     // Append the elements to the new <div> element
     // instructionDiv.append(backButton, instructionText, nextButton);
-    instructionDiv.append(buttonContainer, instructionText);
+    instructionDiv.append(instructionText, buttonContainer);
     container.append(instructionDiv);
 
     if (categoryIndex === 0 && stepIndex === 0) {
@@ -787,6 +804,22 @@ function displayInstruction(categoryIndex, stepIndex) {
 }
 
 
+// document.addEventListener("keypress", (event) => {
+//     console.log("keypress", event.key);
+// }); why does this need to be put in display function to work ?
+
+function boxHiglight(idx) {
+    const boxElement = document.querySelector(`.box${idx + 1}`);
+    const imgElement = boxElement.querySelector('img');
+    boxElement.style.border = '2px solid red';
+    if (imgElement) {
+        let pourButton = boxElement.querySelector('button');
+        pourButton.style.display = 'block';
+        console.log("pourButton in box");
+        pourButton.style.border = 'black 2px solid';
+        pourButton.style.animation = 'shake 0.5s infinite';
+    }
+}
 
 // Initial instruction display
 displayInstruction(currentCategory, currentStep);
