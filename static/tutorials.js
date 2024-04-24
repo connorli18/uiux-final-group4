@@ -2,6 +2,7 @@ let instructions = null; // Declare temp globally
 let currentCategory = 0;
 let currentStep = 0;
 let globalTxtButton = null; // will store next button later
+let chosenDrink = null;
 
 window.onload = function () {
     fetch('/random-drink')
@@ -10,6 +11,7 @@ window.onload = function () {
             var overlayText = document.querySelector('.overlay-text');
             if (overlayText) {
                 overlayText.innerText = data.drink;
+                chosenDrink = data.drink;
                 instructions = data.TELLMEWHATTODOICANTTHINKFORMYSELF;
                 console.log("instr", instructions);
                 displayInstruction(currentCategory, currentStep);
@@ -108,9 +110,185 @@ document.addEventListener('DOMContentLoaded', function () {
                                 // console.log("instr for curr categories", instructions[currentCategory]);
                                 // correctIndex = instructions[currentCategory][instructions[currentCategory].length - 1];
                                 // console.log("correct index", correctIndex);
+
+
+
+
+
                                 if (index === correctIndex) {
                                     // Perform the desired action for the correct choice
                                     //trigger next button !
+                                    if (categoryId !== 'glassware') {
+
+                                        // Find the first boxElement that has a placeholder image
+                                        let placeholderBoxIndex = -1;
+                                        for (let i = 1; i <= 4; i++) {
+                                            const boxElement = document.querySelector(`.box${i}`);
+                                            const imgElement = boxElement.querySelector('img');
+                                            if (imgElement.src === "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") {
+                                                placeholderBoxIndex = i - 1;
+                                                break;
+                                            }
+                                        }
+
+                                        // If there is no box with a placeholder image, don't add the new image
+                                        if (placeholderBoxIndex === -1) {
+                                            return;
+                                        }
+
+                                        // Add the item to the last clicked items and update the image of the corresponding box
+                                        lastClickedItems[placeholderBoxIndex] = item;
+                                        const boxElement = document.querySelector(`.box${placeholderBoxIndex + 1}`);
+                                        if (boxElement) {
+                                            const imgElement = boxElement.querySelector('img');
+                                            if (imgElement) {
+                                                imgElement.src = item;
+                                                imgElement.style.objectFit = 'contain';  // Set the width of the image
+                                                imgElement.style.height = '90%';
+                                                imgElement.style.width = '90%';  // Set the height of the image
+
+                                                imgElement.draggable = true;  // Make the item draggable
+
+                                                imgElement.addEventListener('dragstart', function (event) {
+                                                    event.dataTransfer.setData('text/plain', item);
+                                                    event.dataTransfer.setData('text/elementId', imgElement.id);  // Store the id of the imgElement
+                                                });
+
+                                                boxElement.style.position = 'relative';
+
+                                                const pourButton = document.createElement('button');
+                                                pourButton.style.fontSize = '20px';
+                                                pourButton.textContent = 'Pour';
+                                                pourButton.style.display = 'none';  // Hide the button by default
+                                                pourButton.style.position = 'absolute';  // Position the button absolutely
+                                                pourButton.style.top = '80%';  // Center the button vertically
+                                                pourButton.style.left = '50%';  // Center the button horizontally
+                                                pourButton.style.transform = 'translate(-50%, -50%)';  // Ensure the button is centered
+                                                boxElement.appendChild(pourButton);
+
+                                                // Show the "pour" button when the image is hovered over
+                                                boxElement.addEventListener('mouseover', function () {
+                                                    pourButton.style.display = 'block';
+                                                });
+
+                                                // Hide the "pour" button when the mouse leaves the image
+                                                boxElement.addEventListener('mouseout', function () {
+                                                    pourButton.style.display = 'none';
+                                                });
+
+
+                                                let pouringImage;
+                                                let pouringInterval;
+                                                let rotation = 0;
+                                                let isPouring = false;
+                                                let isPouringInProgress = false;
+                                                let count = 0;  // Add a variable to keep track of the count
+                                                let countInterval;  // Add a variable to keep track of the interval that updates the count
+                                                let countElement;  // Add a variable to keep track of the element that displays the count
+
+                                                // Start pouring when the "Pour" button is pressed down
+                                                pourButton.addEventListener('mousedown', function () {
+                                                    if (isPouring || isPouringInProgress) return;
+                                                    isPouring = true;
+                                                    isPouringInProgress = true;
+
+                                                    // Create a new image element
+                                                    pouringImage = document.createElement('img');
+                                                    pouringImage.src = imgElement.src;
+                                                    pouringImage.style.position = 'fixed';
+                                                    pouringImage.style.top = '50%';
+                                                    pouringImage.style.left = '56%';
+                                                    pouringImage.style.width = 'auto';
+                                                    pouringImage.style.height = '15%';
+                                                    pouringImage.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+                                                    pouringImage.style.zIndex = '1001';
+
+                                                    // Append the new image to the body of the document
+                                                    document.body.appendChild(pouringImage);
+
+                                                    // Create a new element to display the count
+                                                    countElement = document.createElement('div');
+                                                    countElement.style.position = 'fixed';
+                                                    countElement.style.top = '45%';
+                                                    countElement.style.left = '60%';
+                                                    countElement.style.zIndex = '1002';  // Make sure the count is above everything else
+                                                    countElement.style.textAlign = 'center';
+                                                    countElement.style.fontSize = '16px';  // Adjust this value to change the size of the count
+                                                    countElement.textContent = '0 oz';
+
+
+                                                    // Add these lines to make the element a circle with a light grey background
+                                                    countElement.style.width = '100px';  // Adjust this value to change the size of the circle
+                                                    countElement.style.height = '50px';  // Adjust this value to change the size of the circle
+                                                    countElement.style.backgroundColor = 'lightgrey';
+                                                    countElement.style.borderRadius = '50%';  // This makes the element a circle
+                                                    countElement.style.display = 'flex';
+                                                    countElement.style.justifyContent = 'center';
+                                                    countElement.style.alignItems = 'center';
+
+                                                    // Append the count to the body of the document
+                                                    document.body.appendChild(countElement);
+
+                                                    // Start rotating the image
+                                                    pouringInterval = setInterval(function () {
+                                                        if (rotation < 150) {
+                                                            rotation += 75;
+                                                        } else {
+                                                            rotation += 0;
+                                                        }
+                                                        pouringImage.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+                                                    }, 100);
+
+                                                    // Start updating the count
+                                                    countInterval = setInterval(function () {
+                                                        count += 0.25;  // Increase the count by 0.25 every second
+                                                        countElement.textContent = `${count.toFixed(2)} oz`;  // Update the count element with the new count
+                                                    }, 400);  // Update the count every second
+                                                });
+
+                                                // Stop pouring when the mouse button is released, regardless of where the mouse is
+                                                window.addEventListener('mouseup', stopPouring);
+
+                                                function stopPouring() {
+                                                    if (!isPouring) return;
+                                                    isPouring = false;
+
+                                                    if (pouringInterval) {
+                                                        clearInterval(pouringInterval);
+                                                        pouringInterval = setInterval(function () {
+                                                            if (rotation > 0) {
+                                                                rotation -= 30;
+                                                                pouringImage.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+                                                            } else {
+                                                                clearInterval(pouringInterval);
+                                                                pouringImage.remove();
+                                                                isPouringInProgress = false;
+                                                            }
+                                                        }, 100);
+                                                    }
+
+                                                    // Stop updating the count and remove the count element when the mouse button is released
+                                                    if (countInterval) {
+                                                        clearInterval(countInterval);
+                                                        countElement.remove();
+                                                        count = 0;  // Reset the count
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    } else {
+                                        const coasterImg = document.querySelector('.coaster-two img');
+                                        const coasterText = document.querySelector('.text-coaster');
+                                        if (coasterImg) {
+                                            coasterImg.src = item;
+                                            coasterImg.style.width = 'auto';  // Set the width of the image
+                                            coasterImg.style.height = '200px';  // Set the height of the image
+                                            coasterImg.style.contain = 'scale-down';  // Keep the aspect ratio of the image
+                                            coasterImg.style.paddingBottom = '50px';
+                                            glasspicked = true;
+                                        }
+                                    }
                                     globalTxtButton.click();
                                     console.log('Correct choice clicked!', index);
                                 } else {
@@ -150,179 +328,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     return;
                                 }
 
-
-
-                                if (categoryId !== 'glassware') {
-
-                                    // Find the first boxElement that has a placeholder image
-                                    let placeholderBoxIndex = -1;
-                                    for (let i = 1; i <= 4; i++) {
-                                        const boxElement = document.querySelector(`.box${i}`);
-                                        const imgElement = boxElement.querySelector('img');
-                                        if (imgElement.src === "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") {
-                                            placeholderBoxIndex = i - 1;
-                                            break;
-                                        }
-                                    }
-
-                                    // If there is no box with a placeholder image, don't add the new image
-                                    if (placeholderBoxIndex === -1) {
-                                        return;
-                                    }
-
-                                    // Add the item to the last clicked items and update the image of the corresponding box
-                                    lastClickedItems[placeholderBoxIndex] = item;
-                                    const boxElement = document.querySelector(`.box${placeholderBoxIndex + 1}`);
-                                    if (boxElement) {
-                                        const imgElement = boxElement.querySelector('img');
-                                        if (imgElement) {
-                                            imgElement.src = item;
-                                            imgElement.style.objectFit = 'contain';  // Set the width of the image
-                                            imgElement.style.height = '90%';
-                                            imgElement.style.width = '90%';  // Set the height of the image
-
-                                            imgElement.draggable = true;  // Make the item draggable
-
-                                            imgElement.addEventListener('dragstart', function (event) {
-                                                event.dataTransfer.setData('text/plain', item);
-                                                event.dataTransfer.setData('text/elementId', imgElement.id);  // Store the id of the imgElement
-                                            });
-
-                                            boxElement.style.position = 'relative';
-
-                                            const pourButton = document.createElement('button');
-                                            pourButton.style.fontSize = '20px';
-                                            pourButton.textContent = 'Pour';
-                                            pourButton.style.display = 'none';  // Hide the button by default
-                                            pourButton.style.position = 'absolute';  // Position the button absolutely
-                                            pourButton.style.top = '80%';  // Center the button vertically
-                                            pourButton.style.left = '50%';  // Center the button horizontally
-                                            pourButton.style.transform = 'translate(-50%, -50%)';  // Ensure the button is centered
-                                            boxElement.appendChild(pourButton);
-
-                                            // Show the "pour" button when the image is hovered over
-                                            boxElement.addEventListener('mouseover', function () {
-                                                pourButton.style.display = 'block';
-                                            });
-
-                                            // Hide the "pour" button when the mouse leaves the image
-                                            boxElement.addEventListener('mouseout', function () {
-                                                pourButton.style.display = 'none';
-                                            });
-
-
-                                            let pouringImage;
-                                            let pouringInterval;
-                                            let rotation = 0;
-                                            let isPouring = false;
-                                            let isPouringInProgress = false;
-                                            let count = 0;  // Add a variable to keep track of the count
-                                            let countInterval;  // Add a variable to keep track of the interval that updates the count
-                                            let countElement;  // Add a variable to keep track of the element that displays the count
-
-                                            // Start pouring when the "Pour" button is pressed down
-                                            pourButton.addEventListener('mousedown', function () {
-                                                if (isPouring || isPouringInProgress) return;
-                                                isPouring = true;
-                                                isPouringInProgress = true;
-
-                                                // Create a new image element
-                                                pouringImage = document.createElement('img');
-                                                pouringImage.src = imgElement.src;
-                                                pouringImage.style.position = 'fixed';
-                                                pouringImage.style.top = '50%';
-                                                pouringImage.style.left = '56%';
-                                                pouringImage.style.width = 'auto';
-                                                pouringImage.style.height = '15%';
-                                                pouringImage.style.transform = 'translate(-50%, -50%) rotate(0deg)';
-                                                pouringImage.style.zIndex = '1001';
-
-                                                // Append the new image to the body of the document
-                                                document.body.appendChild(pouringImage);
-
-                                                // Create a new element to display the count
-                                                countElement = document.createElement('div');
-                                                countElement.style.position = 'fixed';
-                                                countElement.style.top = '45%';
-                                                countElement.style.left = '60%';
-                                                countElement.style.zIndex = '1002';  // Make sure the count is above everything else
-                                                countElement.style.textAlign = 'center';
-                                                countElement.style.fontSize = '16px';  // Adjust this value to change the size of the count
-                                                countElement.textContent = '0 oz';
-
-
-                                                // Add these lines to make the element a circle with a light grey background
-                                                countElement.style.width = '100px';  // Adjust this value to change the size of the circle
-                                                countElement.style.height = '50px';  // Adjust this value to change the size of the circle
-                                                countElement.style.backgroundColor = 'lightgrey';
-                                                countElement.style.borderRadius = '50%';  // This makes the element a circle
-                                                countElement.style.display = 'flex';
-                                                countElement.style.justifyContent = 'center';
-                                                countElement.style.alignItems = 'center';
-
-                                                // Append the count to the body of the document
-                                                document.body.appendChild(countElement);
-
-                                                // Start rotating the image
-                                                pouringInterval = setInterval(function () {
-                                                    if (rotation < 150) {
-                                                        rotation += 75;
-                                                    } else {
-                                                        rotation += 0;
-                                                    }
-                                                    pouringImage.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
-                                                }, 100);
-
-                                                // Start updating the count
-                                                countInterval = setInterval(function () {
-                                                    count += 0.25;  // Increase the count by 0.25 every second
-                                                    countElement.textContent = `${count.toFixed(2)} oz`;  // Update the count element with the new count
-                                                }, 400);  // Update the count every second
-                                            });
-
-                                            // Stop pouring when the mouse button is released, regardless of where the mouse is
-                                            window.addEventListener('mouseup', stopPouring);
-
-                                            function stopPouring() {
-                                                if (!isPouring) return;
-                                                isPouring = false;
-
-                                                if (pouringInterval) {
-                                                    clearInterval(pouringInterval);
-                                                    pouringInterval = setInterval(function () {
-                                                        if (rotation > 0) {
-                                                            rotation -= 30;
-                                                            pouringImage.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
-                                                        } else {
-                                                            clearInterval(pouringInterval);
-                                                            pouringImage.remove();
-                                                            isPouringInProgress = false;
-                                                        }
-                                                    }, 100);
-                                                }
-
-                                                // Stop updating the count and remove the count element when the mouse button is released
-                                                if (countInterval) {
-                                                    clearInterval(countInterval);
-                                                    countElement.remove();
-                                                    count = 0;  // Reset the count
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                } else {
-                                    const coasterImg = document.querySelector('.coaster-two img');
-                                    const coasterText = document.querySelector('.text-coaster');
-                                    if (coasterImg) {
-                                        coasterImg.src = item;
-                                        coasterImg.style.width = 'auto';  // Set the width of the image
-                                        coasterImg.style.height = '200px';  // Set the height of the image
-                                        coasterImg.style.contain = 'scale-down';  // Keep the aspect ratio of the image
-                                        coasterImg.style.paddingBottom = '50px';
-                                        glasspicked = true;
-                                    }
-                                }
                             });
 
                             box.appendChild(itemElement);
@@ -741,7 +746,6 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
     });
 }
 
-
 //function to pop the shit out of the categorires
 function popping(index) {
     myCategories = ["glassware", "liquors", "liqueurs", "syrups", "juices-mixer"]
@@ -756,17 +760,79 @@ function chilling(index) {
     console.log(currentCategory.text());
     currentCategory.removeClass('click-me');
 
+
+    function chilling(index) {
+        myCategories = ["glassware", "liquors", "liqueurs", "syrups", "juices-mixer"]
+        let currentCategory = $(`#${myCategories[index]}`);
+        console.log(currentCategory.text());
+        currentCategory.removeClass('click-me');
+
+
+        for (let i = 1; i <= 4; i++) {
+            // Create a new div element for the box
+            const boxElement = document.querySelector(`.box${i}`);
+            if (boxElement) {
+                console.log(boxElement.style.border);
+                boxElement.style.border = 'none';
+            }
+        }
+
+
+    }
+
 }
 
 
+
+function checkMeasure(categoryIndex, stepIndex) {
+
+    const measure_map = new Map([
+        ['Espresso Martini', new Map([
+            ['11', 1],
+            ['21', 2],
+            ['41', 3]
+        ])],
+
+        ['Classic Martini', new Map([
+            ['11', 1],
+        ])],
+        ['French Martini', new Map([
+            ['11', 1],
+            ['21', 2],
+            ['31', 3],
+            ['41', 4],
+
+        ])],
+        ['Peach Bellini', new Map([
+            ['21', 1],
+            ['31', 2],
+            ['41', 3],
+
+        ])],
+
+    ]);
+
+
+    const Mkey = categoryIndex.toString() + stepIndex.toString();
+
+    console.log(Mkey)
+    if (measure_map.get(chosenDrink).has(Mkey)) {
+        const targ_box = measure_map.get(chosenDrink).get(Mkey);
+        console.log("highlighting", targ_box, Mkey)
+
+        boxHiglight(targ_box);
+    }
+
+}
+
 // Function to display current instruction
 function displayInstruction(categoryIndex, stepIndex) {
-
+    // add logic to match cate & step with map[chosen_drink]
+    checkMeasure(categoryIndex, stepIndex);
 
     document.addEventListener('keydown', function (event) {
         if (event.keyCode === 39) {
             nextButton.click();
-            boxHiglight(0);
         }
         else if (event.keyCode === 37) {
             backButton.click();
@@ -778,7 +844,6 @@ function displayInstruction(categoryIndex, stepIndex) {
 
 
     let backButton = $('<button>Back</button>');
-    console.log(categoryIndex, instructions.length);
     let instructionText = $('<p></p>').text(instructions[categoryIndex][stepIndex]);
     instructionText.css('font-size', '25px');
 
@@ -809,15 +874,25 @@ function displayInstruction(categoryIndex, stepIndex) {
 // }); why does this need to be put in display function to work ?
 
 function boxHiglight(idx) {
-    const boxElement = document.querySelector(`.box${idx + 1}`);
+    const boxElement = document.querySelector(`.box${idx}`);
     const imgElement = boxElement.querySelector('img');
-    boxElement.style.border = '2px solid red';
+    //boxElement.style.border = '2px solid red';
     if (imgElement) {
+        const children = imgElement.childNodes;
+        console.log("children", children);
+        children.forEach(child => {
+            // Do something with each child element
+            console.log(child);
+        });
+
+
+
         let pourButton = boxElement.querySelector('button');
+        console.log("pourButton in box", pourButton);
         pourButton.style.display = 'block';
-        console.log("pourButton in box");
+
         pourButton.style.border = 'black 2px solid';
-        pourButton.style.animation = 'shake 0.5s infinite';
+        pourButton.style.animation = 'shake 1.2s infinite';
     }
 }
 

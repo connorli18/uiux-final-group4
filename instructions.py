@@ -16,6 +16,7 @@ instructions = {
         ["Do not add any syrups as this is a classic martini.", -1],
         # Juices/Mixers
         ["It's usually garnished with a twist of lemon or an olive. The simplicity of the Martini is its defining characteristics !", -1]
+    #classic: [1][1] => box[1]
     ],
 
     'French Martini': [
@@ -40,8 +41,11 @@ instructions = {
         ],
         # Juices/Mixers
         [
+            "Pineapple juice is a popular choice for this cocktail.", 
             "Add 1/2 oz (15 ml) of pineapple juice.",1 
         ]
+
+        #French: [1][1] => box[1]; [2][1] => box[2]; [3][1] => box[3]; [4][1] => box[4]
     ],
 
     'Peach Bellini': [
@@ -58,11 +62,14 @@ instructions = {
         ],
         # Syrups
         [
-            "Add 2 oz (60 ml) of peach purée or your favorite syrup",0
+            "You can choose peach purée or your favorite syrup",
+            "Add 2 oz (60 ml) of syrup", 0
         ],
         # Juices/Mixers
         ["Optional juice/mixer: you could add some tropical (ideally peach) juice.",
         "Add around 1/2 oz (15 ml) of juice", 2]
+        # 
+        # hey chatgpt, here is instruction peach  bellini => [2][1] => box[1]; [3][1] => box[2]; [4][1] => box[3]
     ],
 
     'Espresso Martini': [
@@ -74,7 +81,8 @@ instructions = {
         [
             "For liquor, choose vodka.",
             "Measure 1 oz (30 ml) of vodka.", 0
-        ],
+        ],  
+        # espresso: [1][1] => box[0+1];   [2][1] => box[1+1] 
         # Liqueurs
         [
             "For liqueur, choose coffee liqueur (such as Kahlúa).",
@@ -84,7 +92,7 @@ instructions = {
         ["Don't put syrups in this classy cocktail.", -1],
         # Juices/Mixers
         [
-            "Brew a shot of espresso and let it cool to room temperature.", 0
+            "Brew a shot of espresso and let it cool to room temperature.", "Around 1 oz to 1.5 oz is the recommended range", 0
         ]
     ]
 }

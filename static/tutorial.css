@@ -26,24 +26,20 @@
 
 @keyframes shake {
     0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    75% {
-        transform: translateX(-5px);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 
     100% {
-        transform: translateX(0);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
+}
+
+
+.shake {
+    animation: spin 3s linear infinite;
+    /* Spin for 3 seconds infinitely */
+    animation-delay: 5s;
+    /* Delay the start of the animation by 5 seconds */
 }
 
 
