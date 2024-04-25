@@ -186,8 +186,38 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 let countInterval;  // Add a variable to keep track of the interval that updates the count
                                                 let countElement;  // Add a variable to keep track of the element that displays the count
 
+
+                                                const volume_map = new Map([
+                                                    ['Espresso Martini', new Map([
+                                                        ['11', 1],
+                                                        ['21', 1],
+                                                        ['41', 1]
+                                                    ])],
+
+                                                    ['Classic Martini', new Map([
+                                                        ['11', 1.5],
+                                                    ])],
+                                                    ['French Martini', new Map([
+                                                        ['11', 1.5],
+                                                        ['21', 0.5],
+                                                        ['31', 0.5],
+                                                        ['41', 0.5],
+
+                                                    ])],
+                                                    ['Peach Bellini', new Map([
+                                                        ['21', 0.5],
+                                                        ['31', 2],
+                                                        ['41', 0.5],
+
+                                                    ])],
+
+                                                ]);
+
+
+
+
                                                 // Start pouring when the "Pour" button is pressed down
-                                                pourButton.addEventListener('mousedown', function () {
+                                                function mouseDownHandler() {
                                                     if (isPouring || isPouringInProgress) return;
                                                     isPouring = true;
                                                     isPouringInProgress = true;
@@ -243,8 +273,37 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     countInterval = setInterval(function () {
                                                         count += 0.25;  // Increase the count by 0.25 every second
                                                         countElement.textContent = `${count.toFixed(2)} oz`;  // Update the count element with the new count
+
+                                                        // New logic for stoppage when the limit is reached
+                                                        const Mkey = currentCategory.toString() + currentStep.toString();
+
+                                                        console.log(Mkey)
+                                                        if (volume_map.get(chosenDrink).has(Mkey)) {
+                                                            const limit = volume_map.get(chosenDrink).get(Mkey);
+                                                            console.log("highlighting limit volume", Mkey, limit);
+                                                            if (count === limit) {
+                                                                clearInterval(countInterval); // Stop the count interval
+                                                                // Additional logic to handle stopping the mouse down event
+
+                                                                document.removeEventListener('mousedown', mouseDownHandler);
+                                                                // Scroll to the center of the window
+                                                                arr = [`We only have ${limit} oz !`, 'Not too much you lil alcoholic', `Oops, only ${limit} oz allowed !`]
+                                                                let randomIndex = Math.floor(Math.random() * arr.length);
+                                                                countElement.textContent = arr[randomIndex];
+                                                                const centerY = window.innerHeight / 2;
+                                                                window.scrollTo({
+                                                                    top: centerY,
+                                                                    behavior: 'smooth'
+                                                                });
+                                                                globalTxtButton.click();
+                                                            }
+
+                                                        }
+
+
                                                     }, 400);  // Update the count every second
-                                                });
+                                                }
+                                                pourButton.addEventListener('mousedown', mouseDownHandler);
 
                                                 // Stop pouring when the mouse button is released, regardless of where the mouse is
                                                 window.addEventListener('mouseup', stopPouring);
@@ -386,6 +445,7 @@ if (trashcan) {
 
 
 //Shaker and Mixing Animation
+
 let shakerImage = document.querySelector('.shaker-two img');
 let mixButton = document.querySelector('.mix-button');
 let isMixing = false;
@@ -444,6 +504,25 @@ mixButton.addEventListener('click', function () {
         shakerImage.style.display = '';
         shakerImage.style.zIndex = '0';
     }, 3000);
+
+    // Send a signal to the server
+    fetch('/api/pour-history-mix', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mix: true })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+
 });
 
 
@@ -487,6 +566,24 @@ shakeButton.addEventListener('click', function () {
         shakeButton.style.display = '';
         iceButton.style.display = '';
     }, 3000);
+
+
+    fetch('/api/pour-history-shake', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mix: true })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
 });
 
 
@@ -542,6 +639,24 @@ iceButton.addEventListener('click', function () {
             iceButton.style.display = '';
             shakerImage.style.zIndex = '0';
         }
+    });
+
+
+    fetch('/api/pour-history-addIce', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mix: true })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
     });
 });
 
@@ -645,10 +760,26 @@ pourIntoGlassButton.addEventListener('mousedown', function () {
         }
         shakerImagecopy.style.transform = `translate(-50%, -50%) rotate(${-rotation}deg)`;
     }, 100);
+
+    fetch('/api/pourIntoGlass', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ pour: true })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Success:', data);
+    }).catch(error => {
+        console.error('Error:', error);
+    });
 });
 
 // Stop pouring when the mouse button is released or leaves the button
-pourIntoGlassButton.addEventListener('mouseup', endPour);
 pourIntoGlassButton.addEventListener('mouseleave', endPour);
 
 function endPour() {
@@ -679,10 +810,26 @@ function endPour() {
     }, 100);
 }
 
+let seconds = 0;
+let minutes = 0;
+
+function displayTimer() {
+    seconds++;
+    if (seconds >= 60) {
+        minutes++;
+        seconds = 0;
+    }
+    let formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+    let formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    let time = formattedMinutes + ':' + formattedSeconds;
+    document.getElementById('clock').innerText = time;
+    setTimeout(displayTimer, 1000);
+}
+
 
 // JavaScript
 document.querySelector('.serving-button').addEventListener('click', function () {
-    window.location.href = '/result';
+    window.location.href = '/bartender/result';
 });
 
 
@@ -811,7 +958,11 @@ function checkMeasure(categoryIndex, stepIndex) {
         ])],
 
     ]);
+    //when sth is clicked correclt => check measure activates and find the box that the click create
+    // then highlight it
 
+
+    //when sth is clicked correclty => the box is created =>
 
     const Mkey = categoryIndex.toString() + stepIndex.toString();
 
