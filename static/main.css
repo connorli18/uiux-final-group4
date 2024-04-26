@@ -229,7 +229,7 @@ a.btn.selected-incorrect {
 
 .notepad {
     position: absolute;
-    top: 100px;
+    top: 130px;
     right: 1130px;
     width: 150px;
     height: auto;
@@ -432,7 +432,7 @@ a.btn.selected-incorrect {
 
 #clock {
     position: absolute;
-    top: 150px;
+    top: 180px;
     right: 200px;
     width: 150px;
     font-size: 2em;
