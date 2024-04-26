@@ -211,14 +211,33 @@ body{
     height: auto;
 }
 
-.notepad .overlay-text {
+.notepad .overlay-text-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 50%;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #838383;  
+    font-size: 16px;  
+    background-color: transparent; 
+    text-decoration: underline;
+    width: 90px;
+}
+
+.notepad .overlay-text-2 {
+    position: absolute;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000;  
     font-size: 25px;  
-    background-color: #fff;  
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
 }
 
 .trashcan {

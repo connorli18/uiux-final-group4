@@ -201,7 +201,7 @@ def calc_result():
                 feedback.append(f"You didn't include {amount} oz of {ingredient}!")
             elif graded_pour["ingredients"][ingredient] != amount:
                 score -= 0.3
-                feedback.append(f"You didn't include the correct amount of {ingredient}!")
+                feedback.append(f"You didn't include the correct amount of {ingredient}! It should be {amount} oz!")
         
         for ingredient in graded_pour["ingredients"]:
             if ingredient not in grader["ingredients"]:
@@ -218,7 +218,15 @@ def resultPage():
     if feedbacks == []:
         feedbacks = ["Congratulations! You made a perfect pour!"]
     result = max(0, result)
-    return render_template("result.html", result=result, feedbacks=feedbacks)
+    if result <= 3:
+        title_text = "Ew...Dry as a Bone!"
+    elif result <= 5:
+        title_text = "Shakin' Things Up...Kinda!"
+    elif result <= 8:
+        title_text = "Cheers to that Pour!"
+    else:
+        title_text = "Hmmmmm...Delicious and Refreshing!"
+    return render_template("result.html", result=result, feedbacks=feedbacks, title_text=title_text)
 
 @app.route('/get-bar-items')
 def get_items():

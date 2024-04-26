@@ -1,1 +1,1 @@
-{"drinkName": "Classic Martini", "glassType": "Coupe Glass", "mix": false, "shake": false, "addIce": false, "addIce2": false, "ingredients": {"Gin": 1, "Vodka": 1, "Simple Syrup": 0.5, "Dry Vermouth": 0.75}}
+{"drinkName": "Espresso Martini", "glassType": "", "mix": false, "shake": false, "addIce": false, "addIce2": false, "ingredients": {"Vodka": 0.75, "Gin": 0.25, "Coffee Liqueur": 0.75, "Simple Syrup": 0.5, "Espresso": 0.75}}

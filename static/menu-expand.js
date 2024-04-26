@@ -2,9 +2,9 @@ window.onload = function () {
     fetch('/random-drink')
         .then(response => response.json())
         .then(data => {
-            var overlayText = document.querySelector('.overlay-text');
+            var overlayText = document.querySelector('.overlay-text-2');
             if (overlayText) {
-                overlayText.innerText = data.drink;
+                overlayText.innerHTML = data.drink;
             }
         })
         .catch(error => console.error('Error:', error));
@@ -640,7 +640,7 @@ let uprightInterval;
 
 // Create the "Pour into Glass" button
 let pourIntoGlassButton = document.createElement('button');
-pourIntoGlassButton.textContent = 'Pour Into Glass';
+pourIntoGlassButton.textContent = 'Strain Into Glass';
 pourIntoGlassButton.classList.add('pour-into-glass');
 pourIntoGlassButton.style.position = 'absolute';
 pourIntoGlassButton.style.top = '50%';
