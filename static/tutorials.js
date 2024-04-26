@@ -420,10 +420,10 @@ if (trashcan) {
 
         // Find the image element with the given id and replace it with the placeholder
         const itemElement = document.getElementById(elementId);
-        if (itemElement) {
-            itemElement.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-            itemElement.alt = "Placeholder";
-        }
+        // if (itemElement) {
+        //     itemElement.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+        //     itemElement.alt = "Placeholder";
+        // }
 
         // Change the background color back when the item is dropped
         trashcan.style.backgroundColor = '';
