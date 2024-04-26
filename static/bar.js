@@ -88,12 +88,14 @@ function displayQuizquestionPage(question_data){
         answer_button_2.addClass("disabled");
         answer_button_3.addClass("disabled");
         answer_button_4.addClass("disabled");
+        
         // Check if selected answer matches the correct answer
         if (selectedAnswer === correctanswer) {
             // Output correct response
             console.log("Correct answer response");
+            $(this).addClass("selected-correct");
             let row_3 = $("<div class='row'>");
-            let correct_div_1 = $("<div id='correct-div' style='border: 2px solid green; color: green; padding: 10px;' class='container'>");
+            let correct_div_1 = $("<div id='correct-div' style='border: 4px solid green; color: green; padding: 10px; font-size: 20px;' class='container'>");
             result = "Correct! " + description;
             $(correct_div_1).append(result);
             $(row_3).append(correct_div_1);
@@ -101,8 +103,9 @@ function displayQuizquestionPage(question_data){
         } else {
             // Output wrong response
             console.log("Wrong answer response");
+            $(this).addClass("selected-incorrect");
             let row_3 = $("<div class='row'>");
-            let wrong_div_1 = $("<div id='wrong-div' style='border: 2px solid red; color: red; padding: 10px;' class='container'>");
+            let wrong_div_1 = $("<div id='wrong-div' style='border: 4px solid red; color: red; padding: 10px; font-size: 20px;' class='container'>");
             result = "Incorrect! " + description;
             $(wrong_div_1).append(result);
             $(row_3).append(wrong_div_1);
@@ -121,8 +124,8 @@ function displayQuizquestionPage(question_data){
     let row_3 = $("<div class='row'>");
     let div_question_col_12_3 = $("<div class='col-md-12 col-sm-12'>");     //Create div in row for info
     let final_div_1 = $("<div id='final-div' class='container'>");
-    let prev_button_1 = $("<a class='btn btn-outline-dark btn-lg nav_btn' role='button'><-</a>");
-    let next_button_1 = $("<a class='btn btn-outline-dark btn-lg nav_btn' role='button'>-></a>");
+    let prev_button_1 = $("<a class='btn btn-outline-success btn-lg nav_btn' role='button'><-</a>");
+    let next_button_1 = $("<a class='btn btn-outline-success btn-lg nav_btn' role='button'>-></a>");
         
     if (prev_id == 0 && next_id == 2){
         $(prev_button_1).attr('href', '/quiz');
