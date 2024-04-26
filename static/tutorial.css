@@ -45,8 +45,8 @@
 
 .notepad {
     position: absolute;
-    top: 100px;
-    right: 100px;
+    top: 130px;
+    right: 180px;
     width: 150px;
     height: auto;
 }
@@ -58,4 +58,38 @@
 .notepad img {
     width: 100%;
     height: auto;
+}
+
+
+.shaker {
+    margin-top: -100px;
+    padding-top: 0px;
+}
+
+.shaker-two {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shaker img {
+    width: 200px;
+    height: auto;
+    margin-top: -5px;
+    padding-top: -10px;
+}
+
+.button-container-shaker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mix-button {
+    margin-right: 10px;
+}
+
+.shake-button {
+    margin-left: 10px;
 }

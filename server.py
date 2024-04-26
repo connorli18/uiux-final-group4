@@ -64,6 +64,7 @@ def homePage():
 
 @app.route('/drinks')                                   #Drinkpage
 def drinkPage():
+    return render_template("menu.html")
     return render_template("drinks.html")
 
 @app.route('/quiz')                                     #Quizpage
@@ -344,6 +345,24 @@ def random_drinks():
 'TELLMEWHATTODOICANTTHINKFORMYSELF': instructions[chosen]
     
     })
+
+
+@app.route('/peach_bellini')
+def peach_bellini():
+    return render_template("drinks.html", chosen_drink = "Peach Bellini", instructions = instructions["Peach Bellini"])
+
+@app.route('/french_martini')
+def french_martini():
+    return render_template("drinks.html", chosen_drink = "French Martini", instructions = instructions["French Martini"])
+
+@app.route('/espresso_martini')
+def espresso_martini():
+    return render_template("drinks.html", chosen_drink = "Espresso Martini", instructions = instructions["Espresso Martini"])
+
+@app.route('/classic_martini')
+def classic_martini():
+    return render_template("drinks.html", chosen_drink = "Classic Martini", instructions = instructions["Classic Martini"])
+      
 
 if __name__ == '__main__':
     app.run(debug=True)

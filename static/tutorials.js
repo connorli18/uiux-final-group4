@@ -1,24 +1,7 @@
-let instructions = null; // Declare temp globally
 let currentCategory = 0;
 let currentStep = 0;
 let globalTxtButton = null; // will store next button later
-let chosenDrink = null;
 
-window.onload = function () {
-    fetch('/random-drink')
-        .then(response => response.json())
-        .then(data => {
-            var overlayText = document.querySelector('.overlay-text');
-            if (overlayText) {
-                overlayText.innerText = data.drink;
-                chosenDrink = data.drink;
-                instructions = data.TELLMEWHATTODOICANTTHINKFORMYSELF;
-                console.log("instr", instructions);
-                displayInstruction(currentCategory, currentStep);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-};
 
 let box = null;
 let draggedItem = null;
@@ -28,7 +11,11 @@ let lastClickedCategory = null;
 document.addEventListener('DOMContentLoaded', function () {
     const categories = document.querySelectorAll('.category');
     let nextBoxIndex = 0;  // To keep track of the box where the next item should be placed
-
+    var overlayText = document.querySelector('.overlay-text-2');
+    if (overlayText) {
+        overlayText.innerText = chosen_drink;
+        displayInstruction(currentCategory, currentStep);
+    }
     categories.forEach(category => {
         category.addEventListener('click', function () {
             // If the box exists and the last clicked category is the same as the current one, remove the box
@@ -55,10 +42,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Set the box's style properties
                 box.style.position = 'absolute';
-                box.style.top = '160px';
-                box.style.right = '400px';
+                box.style.top = '175px';
+                box.style.right = '450px';
                 box.style.width = '700px';
-                box.style.height = '150px';
+                box.style.height = '140px';
                 box.style.backgroundColor = 'transparent';
                 box.style.zIndex = '1000';
                 box.style.border = '2px solid lightgrey';
@@ -278,8 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                                         const Mkey = currentCategory.toString() + currentStep.toString();
 
                                                         console.log(Mkey)
-                                                        if (volume_map.get(chosenDrink).has(Mkey)) {
-                                                            const limit = volume_map.get(chosenDrink).get(Mkey);
+                                                        if (volume_map.get(chosen_drink).has(Mkey)) {
+                                                            const limit = volume_map.get(chosen_drink).get(Mkey);
                                                             console.log("highlighting limit volume", Mkey, limit);
                                                             if (count === limit) {
                                                                 clearInterval(countInterval); // Stop the count interval
@@ -967,8 +954,8 @@ function checkMeasure(categoryIndex, stepIndex) {
     const Mkey = categoryIndex.toString() + stepIndex.toString();
 
     console.log(Mkey)
-    if (measure_map.get(chosenDrink).has(Mkey)) {
-        const targ_box = measure_map.get(chosenDrink).get(Mkey);
+    if (measure_map.get(chosen_drink).has(Mkey)) {
+        const targ_box = measure_map.get(chosen_drink).get(Mkey);
         console.log("highlighting", targ_box, Mkey)
 
         boxHiglight(targ_box);
@@ -1000,6 +987,8 @@ function displayInstruction(categoryIndex, stepIndex) {
 
     let nextButton = $('<button>Next</button>');
     addEventToButtons(backButton, nextButton, instructionText);
+    nextButton.hide();
+    backButton.hide();
     globalTxtButton = nextButton;
 
     let buttonContainer = $('<div></div>');

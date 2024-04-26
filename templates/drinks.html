@@ -25,7 +25,8 @@
 <div class="notepad">
     <div class="notepad-two">
         <img src="static/images/notepad.png" alt="Notepad">
-        <div class="overlay-text"></div>
+        <div class="overlay-text-1">Order Ticket</div>
+        <div class="overlay-text-2"></div>
     </div>
 </div>
 <div class="the-bottom-of-bartender">
@@ -49,6 +50,9 @@
         <div class="button-container-shaker">
             <button class="mix-button">Mix</button>
             <button class="shake-button">Shake</button>
+        </div>
+        <div class="button-container-two">
+            <button class="add-ice">Add Ice</button>
         </div>
     </div>
 </div>
@@ -79,7 +83,12 @@
         </div>
     </div>
 </div>
-
+<script>
+    let chosen_drink = {{ chosen_drink | tojson | safe }};
+    console.log(chosen_drink);
+    let instructions = {{ instructions | tojson | safe }};
+    console.log(instructions);
+</script>
 <script src="{{ url_for('static', filename='tutorials.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tutorial.css') }}">
 
