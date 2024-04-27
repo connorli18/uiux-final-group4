@@ -176,13 +176,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                                 const volume_map = new Map([
                                                     ['Espresso Martini', new Map([
-                                                        ['11', 1],
+                                                        ['11', 1.5],
                                                         ['21', 1],
-                                                        ['41', 1]
+                                                        ['31', 0.5],
+                                                        ['41', 1.5]
                                                     ])],
 
                                                     ['Classic Martini', new Map([
-                                                        ['11', 1.5],
+                                                        ['11', 2],
                                                     ])],
                                                     ['French Martini', new Map([
                                                         ['11', 1.5],
@@ -192,9 +193,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                                     ])],
                                                     ['Peach Bellini', new Map([
-                                                        ['21', 0.5],
-                                                        ['31', 2],
-                                                        ['41', 0.5],
+                                                        ['11', 3],
+                                                        ['41', 2],
 
                                                     ])],
 
@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                         console.log(Mkey)
                                                         if (volume_map.get(chosen_drink).has(Mkey)) {
                                                             const limit = volume_map.get(chosen_drink).get(Mkey);
+                                                            console.log(chosen_drink, Mkey, limit);
                                                             console.log("highlighting limit volume", Mkey, limit);
                                                             if (count === limit) {
                                                                 clearInterval(countInterval); // Stop the count interval
@@ -816,7 +817,7 @@ function displayTimer() {
 
 // JavaScript
 document.querySelector('.serving-button').addEventListener('click', function () {
-    window.location.href = '/bartender/result';
+    window.location.href = '/';
 });
 
 
@@ -860,7 +861,7 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
 
         if (currentStep === instructions[currentCategory].length - 2 && currentCategory === instructions.length - 1) {
             nextBtn.disabled = true;
-            console.log("You have completed the tutorial! or 'Quiz' to test your knowledge!");
+            console.log("You have completed the tutorial!");
             instructionDiv.text("You have completed the tutorial! Click 'Home' button to explore more ");
         }
         else if (currentStep < instructions[currentCategory].length - 2) {  //after we add idx, should be  -2
@@ -870,6 +871,22 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
             backBtn.disabled = false;
         } else if (currentCategory < instructions.length - 1) {
             currentCategory++;
+            //if not last category, and no options chosen for this category
+            while (currentCategory < instructions.length - 1 && instructions[currentCategory][instructions[currentCategory].length - 1] === -1) {
+                let lastIdx = instructions[currentCategory].length - 1;
+                currentCategory++;
+                // if (currentStep === instructions[currentCategory].length - 2 && currentCategory === instructions.length - 1) {
+                //     break;
+
+                // }
+            }
+            currentStep = 0;
+            if (currentCategory === instructions.length - 1 && currentStep === instructions[currentCategory].length - 2) {
+                nextBtn.disabled = true;
+                console.log("You have completed the tutorial!");
+                instructionDiv.text("You have completed the tutorial! Click 'Home' button to explore more ");
+                return;
+            }
             //TODO: here we should call the highlight function for next category
             popping(currentCategory);
             currentStep = 0;
@@ -924,6 +941,7 @@ function checkMeasure(categoryIndex, stepIndex) {
         ['Espresso Martini', new Map([
             ['11', 1],
             ['21', 2],
+            ['31', 3],
             ['41', 3]
         ])],
 
@@ -938,9 +956,8 @@ function checkMeasure(categoryIndex, stepIndex) {
 
         ])],
         ['Peach Bellini', new Map([
-            ['21', 1],
-            ['31', 2],
-            ['41', 3],
+            ['11', 1],
+            ['41', 2],
 
         ])],
 

@@ -93,3 +93,14 @@
 .shake-button {
     margin-left: 10px;
 }
+
+.resized-image {
+    max-width: 200px;
+    /* Set the maximum width */
+    max-height: 200px;
+    /* Set the maximum height */
+    width: auto;
+    /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
+}

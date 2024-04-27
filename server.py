@@ -126,7 +126,8 @@ perfect_pour = {
         "ingredients": {
             "Vodka": 1.5,
             "Chambord": 0.5,
-            "Pineapple Juice": 0.75
+            "Simple Syrup": 0.5,
+            "Pineapple Juice": 0.5
         }
     },
     "Espresso Martini": {
