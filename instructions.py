@@ -3,7 +3,7 @@ instructions = {
     'Classic Martini': [  #????
         # Glassware
         [
-            "Prepare a chilled martini glass for serving.",1
+            "First step: prepare a chilled martini glass for serving.",1
         ],
         # Liquors
         [
@@ -29,7 +29,7 @@ instructions = {
     'French Martini': [
         # Glassware
         [ #coupe glass
-            "Prepare a chilled coupe glass for serving.",0
+            "First step: prepare a chilled coupe glass for serving.",0
         ],
         # Liquors
         [
@@ -64,7 +64,7 @@ instructions = {
     'Peach Bellini': [
         # Glassware
         [ 
-            "Prepare a chilled champagne flute for serving.",2
+            "First step: prepare a chilled champagne flute for serving.",2
         ],
         # Liquors
         ["Choose champagne as the main ingredient for the bellini",
@@ -98,7 +98,7 @@ instructions = {
     'Espresso Martini': [
         # Glassware
         [# wrong => coupe 
-            "Prepare a chilled coupe glass for serving.",0
+            "First step: prepare a chilled coupe glass for serving.",0
         ],
         # Liquors
         [ #1.5  oz

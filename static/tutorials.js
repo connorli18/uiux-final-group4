@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //     return;
         // }
         function categoryEventFunc() {
-            console.log("try it", category);
             // If the box exists and the last clicked category is the same as the current one, remove the box
             if (box && lastClickedCategory === this) {
                 box.remove();
@@ -47,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Set the box's style properties
                 box.style.position = 'absolute';
-                box.style.top = '175px';
-                box.style.right = '450px';
+                box.style.top = '200px';  //cp3
+                box.style.right = '463px';
                 box.style.width = '700px';
                 box.style.height = '140px';
                 box.style.backgroundColor = 'transparent';
@@ -1030,7 +1029,9 @@ function displayInstruction(categoryIndex, stepIndex) {
 
     let backButton = $('<button>Back</button>');
     let instructionText = $('<p></p>').text(instructions[categoryIndex][stepIndex]);
-    instructionText.css('font-size', '25px');
+    instructionText.css('padding-top', '15px');
+    instructionText.css('font-size', '30px');
+
 
     let nextButton = $('<button>Next</button>');
     addEventToButtons(backButton, nextButton, instructionText);
@@ -1098,9 +1099,7 @@ function iceOnMaWrist(categoryIndex, stepIndex) {
         currButton.style.animation = '';
 
         if (currentStep === 0) {
-            let currButton = document.querySelector('.add-ice');
-            currButton.style.border = 'black 2px solid';
-            currButton.style.animation = 'shake 1.2s infinite';
+            currButton = document.querySelector('.add-ice');
         } else if (currentStep === 1) {
             if (['Espresso Martini', 'French Martini'].includes(chosen_drink)) {
                 currButton = document.querySelector('.shake-button');
@@ -1108,21 +1107,15 @@ function iceOnMaWrist(categoryIndex, stepIndex) {
             else {
                 currButton = document.querySelector('.mix-button');
             }
-            currButton.style.border = 'black 2px solid';
-            currButton.style.animation = 'shake 1.2s infinite';
-
-
-
         } else if (currentStep === 2) {
             currButton = document.querySelector('.pour-into-glass');
-            currButton.style.animation = 'shake 1.2s infinite';
             currButton.style.display = 'block'; // Set it to 'block' if it was a block-level element
         } else {
             currButton = document.querySelector('.serving-button');
-            currButton.style.display = 'block'; // Set it to 'block' if it was a block-level element
-            currButton.style.animation = 'shake 1.2s infinite';
-
         }
+        currButton.style.border = 'black 2px solid';
+        currButton.style.animation = 'blink-red 1.8s infinite';
+
     }
 }
 
