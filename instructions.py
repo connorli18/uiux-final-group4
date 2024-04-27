@@ -15,7 +15,14 @@ instructions = {
         # Syrups
         ["Do not add any syrups as this is a classic martini.", -1],
         # Juices/Mixers
-        ["It's usually garnished with a twist of lemon or an olive, no need for any juice or mixers", -1]
+        ["It's usually garnished with a twist of lemon or an olive, no need for any juice or mixers", -1],
+        #
+        [
+    "Add ice to the cocktail shaker.",
+    "Mix the ingredients with a mixer",
+    "Pour the cocktail into the chilled glass.",
+    "Serve and enjoy, you will be headed to the Home page on click!"
+]
     #classic: [1][1] => box[1]
     ],
 
@@ -43,7 +50,13 @@ instructions = {
         [
             "Pineapple juice is a popular choice for this cocktail.", 
             "Add 1/2 oz (15 ml) of pineapple juice.",1 
-        ]
+        ],
+         [
+    "Add ice to the cocktail shaker.",
+    "Shake the ingredients inside the shaker",
+    "Pour the cocktail into the chilled glass.",
+    "Serve and enjoy, you will be headed to the Home page on click!"
+]
 
         #French: [1][1] => box[1]; [2][1] => box[2]; [3][1] => box[3]; [4][1] => box[4]
     ],
@@ -70,7 +83,13 @@ instructions = {
         ],
         # Juices/Mixers:  2 oz
         ["Juice: you could add some tropical (ideally peach) juice.",
-        "Add around 2 oz (15 ml) of juice", 2]
+        "Add around 2 oz (15 ml) of juice", 2],
+         [
+    "Add ice to the cocktail shaker.",
+    "Mix the ingredients with a mixer",
+    "Pour the cocktail into the chilled glass.",
+    "Serve and enjoy, you will be headed to the Home page on click!"
+]
         # 
        #> [2][1] => box[1]; [3][1] => box[2]; [4][1] => box[3]
        #new box: [1[1]=> box1, [4][1] => box 2
@@ -98,7 +117,13 @@ instructions = {
         # Juices/Mixers
         [  #1.5 oz
             "Brew a shot of espresso and let it cool to room temperature.", "1.5 oz is the recommended range", 0
-        ]
+        ],
+         [
+    "Add ice to the cocktail shaker.",
+    "Shake the ingredients inside the shaker",
+    "Pour the cocktail into the chilled glass.",
+    "Serve and enjoy, you will be headed to the Home page on click!"
+]
     ]
 }
 
@@ -109,3 +134,6 @@ instructions = {
 #limitations:
 #if add sth => always 2 instruction since the click automatically move you to next step
 # refactor idea: pouring is a step in it own , not even hard since next button is already trigger when pour full
+
+
+#next step:
