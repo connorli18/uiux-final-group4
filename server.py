@@ -6,9 +6,11 @@ from instructions import instructions
 import json
 import random
 
-
 app = Flask(__name__)
 app.secret_key = 'super secret key'
+
+#Set that stores all the questoin ids
+random_int_set = set()
 
 # Data
 quiz = [
@@ -44,7 +46,7 @@ quiz = [
     },
     {
         "id": 4, 
-        "question": "What is the most popular cocktail?",
+        "question": "From the drinks below, what is the most popular cocktail?",
         "answer1": "Espresso Martini",
         "answer2" : "French Martini",
         "answer3": "Classic Martini",
@@ -52,6 +54,67 @@ quiz = [
         "correctanswer": "Espresso Martini",
         "description": "Espresso Martini is the second most popular cocktail! Right after a Old Fashioned."
     },
+    {
+        "id": 5, 
+        "question": "Which of the following drinks contains caffeine?",
+        "answer1": "Espresso Martini",
+        "answer2" : "Peach Bellini",
+        "answer3": "Classic Martini",
+        "answer4": "French Martini",
+        "correctanswer": "Espresso Martini",
+        "description": "The Espresso Martini contains coffee liqueur which has around 9mg of caffeine."
+    },
+    {
+        "id": 6, 
+        "question": "What drink is prepared in a chilled champagne flute?",
+        "answer1": "Classic Martini",
+        "answer2" : "French Martini",
+        "answer3": "Espresso Martini",
+        "answer4": "Peach Bellini",
+        "correctanswer": "Peach Bellini",
+        "description": "A Peach Bellini is prepared in a chilled champagne flute. A Classic Martini is prepared in a martini glass. An Espresso Martini and a French Martini are prepared in a chilled coupe glass."
+    },
+    {
+        "id": 7, 
+        "question": "What liqueur is used in a French Martini?",
+        "answer1": "Raspberry Liqueur",
+        "answer2" : "Coffee Liqueur",
+        "answer3": "Banana Liqueur",
+        "answer4": "Chocolate Liqueur",
+        "correctanswer": "Raspberry Liqueur",
+        "description": "An important ingredient in a French Martini is Raspberry Liqueur."
+    },
+    {
+        "id": 8, 
+        "question": "What is the main ingredient in a Peach Bellini?",
+        "answer1": "Champagne",
+        "answer2" : "Vodka",
+        "answer3": "Tequila",
+        "answer4": "Gin",
+        "correctanswer": "Champagne",
+        "description": "The main ingredient in a Peach Bellini is Champagne."
+    },
+    {
+        "id": 9, 
+        "question": "Which drink has the least number of ingredients and steps for preparation?",
+        "answer1": "Espresso Martini",
+        "answer2" : "Peach Bellini",
+        "answer3": "Classic Martini",
+        "answer4": "French Martini",
+        "correctanswer": "Classic Martini",
+        "description": "The Classic Martini is the easiest drink to make. However it is by far the strongest in flavor of them all!"
+    },
+    {
+        "id": 10, 
+        "question": "Which drink contains Pineapple Juice?",
+        "answer1": "Classic Martini",
+        "answer2" : "French Martini",
+        "answer3": "Espresso Martini",
+        "answer4": "Peach Bellini",
+        "correctanswer": "French Martini",
+        "description": "The Pineapple Juice is one of the ingredients that gives the French Martini it's unqiue flavor!"
+    },
+
 ]
 # Routes
 @app.route("/hidden")
@@ -101,10 +164,20 @@ def quizcompetePage():
 def quizquestion():
     global quiz
     id = request.get_json()
+
+    if len(random_int_set) == 5:
+        random_int_set.clear()
+
+    random_int = random.randint(1, 10) 
+    if random_int not in random_int_set: 
+        id = random_int
+        random_int_set.add(random_int)
+    
+    print(random_int_set)
     quizquestion_results = []
     print("Hello hello" + str(id))  #error checking
 
-    # find the name in the mideterrean_food data
+    # find the question in the data
     for question in quiz:
         if question["id"] == int(id):
             quizquestion_results.append(question)
