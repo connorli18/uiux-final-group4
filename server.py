@@ -248,7 +248,7 @@ def calc_result():
         grader = perfect_pour[graded_pour["drinkName"]]
         if grader["glassType"] != graded_pour["glassType"]:
             score -= 2
-            feedback.append("You used the wrong glassware!")
+            feedback.append("You used the wrong glassware! It should be a " + grader["glassType"] + "!")
         if grader["addIce"] != graded_pour["addIce"]:
             score -= 0.2
             feedback.append("Next time, always shake/mix with ice!")
