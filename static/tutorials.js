@@ -16,8 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
         overlayText.innerText = chosen_drink;
         displayInstruction(currentCategory, currentStep);
     }
-    categories.forEach(category => {
-        category.addEventListener('click', function () {
+    categories.forEach((category, index) => {
+        // if (index != currentCategory) {
+        //     print(index, categories[index], currentCategory);
+        //     return;
+        // }
+        function categoryEventFunc() {
             // If the box exists and the last clicked category is the same as the current one, remove the box
             if (box && lastClickedCategory === this) {
                 box.remove();
@@ -42,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Set the box's style properties
                 box.style.position = 'absolute';
-                box.style.top = '175px';
-                box.style.right = '450px';
+                box.style.top = '200px';  //cp3
+                box.style.right = '463px';
                 box.style.width = '700px';
                 box.style.height = '140px';
                 box.style.backgroundColor = 'transparent';
@@ -93,14 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
 
                             itemElement.addEventListener('click', function () {
-                                //each img now knows what should be clicked on this step
-                                // console.log("instr for curr categories", instructions[currentCategory]);
-                                // correctIndex = instructions[currentCategory][instructions[currentCategory].length - 1];
-                                // console.log("correct index", correctIndex);
-
-
-
-
 
                                 if (index === correctIndex) {
                                     // Perform the desired action for the correct choice
@@ -176,13 +172,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                                 const volume_map = new Map([
                                                     ['Espresso Martini', new Map([
-                                                        ['11', 1],
+                                                        ['11', 1.5],
                                                         ['21', 1],
-                                                        ['41', 1]
+                                                        ['31', 0.5],
+                                                        ['41', 1.5]
                                                     ])],
 
                                                     ['Classic Martini', new Map([
-                                                        ['11', 1.5],
+                                                        ['11', 2],
                                                     ])],
                                                     ['French Martini', new Map([
                                                         ['11', 1.5],
@@ -192,9 +189,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                                     ])],
                                                     ['Peach Bellini', new Map([
-                                                        ['21', 0.5],
-                                                        ['31', 2],
-                                                        ['41', 0.5],
+                                                        ['11', 3],
+                                                        ['41', 2],
 
                                                     ])],
 
@@ -267,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                         console.log(Mkey)
                                                         if (volume_map.get(chosen_drink).has(Mkey)) {
                                                             const limit = volume_map.get(chosen_drink).get(Mkey);
+                                                            console.log(chosen_drink, Mkey, limit);
                                                             console.log("highlighting limit volume", Mkey, limit);
                                                             if (count === limit) {
                                                                 clearInterval(countInterval); // Stop the count interval
@@ -386,9 +383,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Update the last clicked category
                 lastClickedCategory = this;
             }
-        });
-    });
+        }
+        category.addEventListener('click', categoryEventFunc);
+
+    })
 });
+
 
 
 // Trash Can Drag and Drop
@@ -510,6 +510,11 @@ mixButton.addEventListener('click', function () {
         console.error('Error:', error);
     });
 
+    setTimeout(function () {
+        // Click the button
+        globalTxtButton.click();
+    }, 2900); // 3000 milliseconds = 3 seconds
+
 });
 
 
@@ -571,6 +576,10 @@ shakeButton.addEventListener('click', function () {
     }).catch(error => {
         console.error('Error:', error);
     });
+    setTimeout(function () {
+        // Click the button
+        globalTxtButton.click();
+    }, 3000); // 3000 milliseconds = 3 seconds
 });
 
 
@@ -579,7 +588,8 @@ iceButton.addEventListener('click', function () {
     mixButton.style.display = 'none';
     shakeButton.style.display = 'none';
     iceButton.style.display = 'none';
-
+    // console.log(iceButton.classList); // Print out all classes
+    // iceButton.classList.remove('shake'); // Remove the 'shake' class  I DONT GET IT
     // Create a new image element
     let iceImage = document.createElement('img');
     iceImage.src = 'static/images/ice/ice.png';
@@ -645,6 +655,10 @@ iceButton.addEventListener('click', function () {
     }).catch(error => {
         console.error('Error:', error);
     });
+    setTimeout(function () {
+        // Click the button
+        globalTxtButton.click();
+    }, 3000); // 3000 milliseconds = 3 seconds
 });
 
 
@@ -764,6 +778,10 @@ pourIntoGlassButton.addEventListener('mousedown', function () {
     }).catch(error => {
         console.error('Error:', error);
     });
+    setTimeout(function () {
+        // Click the button
+        globalTxtButton.click();
+    }, 3000); // 3000 milliseconds = 3 seconds
 });
 
 // Stop pouring when the mouse button is released or leaves the button
@@ -816,7 +834,7 @@ function displayTimer() {
 
 // JavaScript
 document.querySelector('.serving-button').addEventListener('click', function () {
-    window.location.href = '/bartender/result';
+    window.location.href = '/';
 });
 
 
@@ -858,19 +876,23 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
             }
         }
 
-        if (currentStep === instructions[currentCategory].length - 2 && currentCategory === instructions.length - 1) {
+        //if this is last category, and last step ever
+        if (currentStep === instructions[currentCategory].length - 1 && currentCategory === instructions.length - 1) {
+            console.log("Did we get here");
             nextBtn.disabled = true;
-            console.log("You have completed the tutorial! or 'Quiz' to test your knowledge!");
-            instructionDiv.text("You have completed the tutorial! Click 'Home' button to explore more ");
         }
-        else if (currentStep < instructions[currentCategory].length - 2) {  //after we add idx, should be  -2
-            //curr step can +1 when it's <= thirdt last. After + => it's 2nd last and that's it.
+        //if this is not the last step in current category => step ++
+        else if (currentStep < instructions[currentCategory].length - 2 || (currentCategory === instructions.length - 1 && currentStep === instructions[currentCategory].length - 2)) {
             currentStep++;
             displayInstruction(currentCategory, currentStep);
             backBtn.disabled = false;
-        } else if (currentCategory < instructions.length - 1) {
+        } else if (currentCategory < instructions.length - 1) { //if last step in current category
             currentCategory++;
-            //TODO: here we should call the highlight function for next category
+            while (currentCategory < instructions.length - 1 && instructions[currentCategory][instructions[currentCategory].length - 1] === -1) {
+                let lastIdx = instructions[currentCategory].length - 1;
+                currentCategory++;
+            }
+            currentStep = 0;
             popping(currentCategory);
             currentStep = 0;
             displayInstruction(currentCategory, currentStep);
@@ -884,6 +906,13 @@ function addEventToButtons(backBtn, nextBtn, instructionDiv) {
 function popping(index) {
     myCategories = ["glassware", "liquors", "liqueurs", "syrups", "juices-mixer"]
     let currentCategory = $(`#${myCategories[index]}`);
+    // for (let i = 0; i < myCategories.length; i++) {
+    //     if (i != index) {
+    //         disableCategory = $(`#${myCategories[i]}`);
+    //         console.log("what");
+    //         disableCategory.off("click");
+    //     }
+    // }
     currentCategory.addClass('click-me');
 
 }
@@ -924,7 +953,8 @@ function checkMeasure(categoryIndex, stepIndex) {
         ['Espresso Martini', new Map([
             ['11', 1],
             ['21', 2],
-            ['41', 3]
+            ['31', 3],
+            ['41', 4]
         ])],
 
         ['Classic Martini', new Map([
@@ -938,9 +968,8 @@ function checkMeasure(categoryIndex, stepIndex) {
 
         ])],
         ['Peach Bellini', new Map([
-            ['21', 1],
-            ['31', 2],
-            ['41', 3],
+            ['11', 1],
+            ['41', 2],
 
         ])],
 
@@ -961,21 +990,38 @@ function checkMeasure(categoryIndex, stepIndex) {
         boxHiglight(targ_box);
     }
 
+    //work on highlighing ice, mix, shake, pour into glass, serving at last step
+    iceOnMaWrist(categoryIndex, stepIndex);
 }
 
-// Function to display current instruction
+function handleClick(event) {
+    event.preventDefault();
+}
+
+//divElement.removeEventListener('click', handleClick);
+
+
 function displayInstruction(categoryIndex, stepIndex) {
     // add logic to match cate & step with map[chosen_drink]
     checkMeasure(categoryIndex, stepIndex);
+    const categories = document.querySelectorAll('.category');
+    // categories.forEach((category, index) => {
+    //     if (index != currentCategory) {
+    //         category.addEventListener('click', handleClick);
+    //         console.log("remove", category);
+    //     }
+    // }
+    // );
 
-    document.addEventListener('keydown', function (event) {
-        if (event.keyCode === 39) {
-            nextButton.click();
-        }
-        else if (event.keyCode === 37) {
-            backButton.click();
-        }
-    });
+
+    // document.addEventListener('keydown', function (event) {
+    //     if (event.keyCode === 39) {
+    //         nextButton.click();
+    //     }
+    //     else if (event.keyCode === 37) {
+    //         backButton.click();
+    //     }
+    // });
     let container = $('#draft');
     container.empty();
     let instructionDiv = $('<div></div>');
@@ -983,7 +1029,9 @@ function displayInstruction(categoryIndex, stepIndex) {
 
     let backButton = $('<button>Back</button>');
     let instructionText = $('<p></p>').text(instructions[categoryIndex][stepIndex]);
-    instructionText.css('font-size', '25px');
+    instructionText.css('padding-top', '15px');
+    instructionText.css('font-size', '30px');
+
 
     let nextButton = $('<button>Next</button>');
     addEventToButtons(backButton, nextButton, instructionText);
@@ -1033,6 +1081,41 @@ function boxHiglight(idx) {
 
         pourButton.style.border = 'black 2px solid';
         pourButton.style.animation = 'shake 1.2s infinite';
+    }
+}
+
+function iceOnMaWrist(categoryIndex, stepIndex) {
+    let currButton = null;
+    if (currentCategory === 5) {
+        currButton = document.querySelector('.pour-into-glass');
+        currButton.style.animation = '';
+        currButton = document.querySelector('.serving-button');
+        currButton.style.animation = '';
+        currButton = document.querySelector('.shake-button');
+        currButton.style.animation = '';
+        currButton = document.querySelector('.mix-button');
+        currButton.style.animation = '';
+        currButton = document.querySelector('.add-ice');
+        currButton.style.animation = '';
+
+        if (currentStep === 0) {
+            currButton = document.querySelector('.add-ice');
+        } else if (currentStep === 1) {
+            if (['Espresso Martini', 'French Martini'].includes(chosen_drink)) {
+                currButton = document.querySelector('.shake-button');
+            }
+            else {
+                currButton = document.querySelector('.mix-button');
+            }
+        } else if (currentStep === 2) {
+            currButton = document.querySelector('.pour-into-glass');
+            currButton.style.display = 'block'; // Set it to 'block' if it was a block-level element
+        } else {
+            currButton = document.querySelector('.serving-button');
+        }
+        currButton.style.border = 'black 2px solid';
+        currButton.style.animation = 'blink-red 1.8s infinite';
+
     }
 }
 

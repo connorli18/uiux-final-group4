@@ -35,6 +35,24 @@
 }
 
 
+@keyframes blink-red {
+    0% {
+        opacity: 1;
+        color: initial;
+    }
+
+    50% {
+        opacity: 0;
+        background-color: red;
+
+    }
+
+    100% {
+        opacity: 1;
+        color: initial;
+    }
+}
+
 .shake {
     animation: spin 3s linear infinite;
     /* Spin for 3 seconds infinitely */
@@ -92,4 +110,15 @@
 
 .shake-button {
     margin-left: 10px;
+}
+
+.resized-image {
+    max-width: 200px;
+    /* Set the maximum width */
+    max-height: 200px;
+    /* Set the maximum height */
+    width: auto;
+    /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
 }

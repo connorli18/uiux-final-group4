@@ -3,6 +3,7 @@ function quizquestionPage(id){
 
     // console.log("Hello from questionquiz");  // error checking
     // console.log(id);  //error checking
+    track_id = id;
 
     //Ajax function for homepage
     $.ajax({
@@ -14,7 +15,7 @@ function quizquestionPage(id){
         success: function(result){
             //console.log("success"); 
             //console.log(result); //Check if successful
-            displayQuizquestionPage(result)
+            displayQuizquestionPage(result, track_id)
         },
         error: function(request, status, error){
             console.log("Error");
@@ -27,7 +28,7 @@ function quizquestionPage(id){
 }
 
 //function to display quiz question
-function displayQuizquestionPage(question_data){
+function displayQuizquestionPage(question_data, track_id){
 
     // console.log("Hello Display QuizquestionPage"); 
     console.log(question_data);
@@ -114,9 +115,9 @@ function displayQuizquestionPage(question_data){
     });
 
     // Set up next and prev button
-    console.log(id);
-    next_id = id + 1;
-    prev_id = id - 1;
+    console.log(track_id);
+    next_id = track_id + 1;
+    prev_id = track_id - 1;
     prev_href = '/quizquestion/' + prev_id;
     next_href = '/quizquestion/' + next_id;
     console.log(next_href);
@@ -130,7 +131,7 @@ function displayQuizquestionPage(question_data){
     if (prev_id == 0 && next_id == 2){
         $(prev_button_1).attr('href', '/quiz');
         $(next_button_1).attr('href', next_href);
-    }else if (prev_id == 3 && next_id == 5){
+    }else if (prev_id == 4 && next_id == 6){
         $(prev_button_1).attr('href', prev_href);
         $(next_button_1).attr('href', '/quizcomplete');
     }else {
@@ -159,7 +160,7 @@ $(document).ready(function(){
         console.log("this is the quizstr: " + quiz_str);
         const regex = /\/(\d+)$/;
         const match = search_query_string.match(regex); 
-        const id = parseInt(match[1]); //Extract the id number of resto
+        const id = parseInt(match[1]); //Extract the id number of question
         console.log("Hello" + id);    //error checking
         quizquestionPage(id);
         // console.log("Hello from else if");    //error checking
