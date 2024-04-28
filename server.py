@@ -154,6 +154,10 @@ def quizquestionPage(id):
     # print(id)
     return render_template("quizquestion.html")
 
+@app.route('/bartendhome')                            #quizquestion Page
+def bartendHome():
+    return render_template("bartend-home.html")
+
 @app.route('/quizcomplete')                            #quizquestion Page
 def quizcompetePage():
     return render_template("quizcomplete.html")
@@ -363,6 +367,7 @@ def pour_history_mix():
         pourHistory['addIce'] = True
     print(pourHistory)
     return jsonify({'message': 'Pour history received and stored.'})
+
 
 @app.route('/api/pour-history-shake', methods=['POST'])
 def pour_history_shake():

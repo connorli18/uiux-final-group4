@@ -1,7 +1,11 @@
+let drinkData = null;
+
 window.onload = function () {
     fetch('/random-drink')
         .then(response => response.json())
         .then(data => {
+            drinkData = data.drink;
+
             var overlayText = document.querySelector('.overlay-text-2');
             if (overlayText) {
                 overlayText.innerHTML = data.drink;
@@ -711,8 +715,14 @@ pourIntoGlassButton.addEventListener('mousedown', function () {
     // Add an 'f' in front of the image name
     let newImageName = 'f' + imageName;
 
+    drinks = {
+        'Classic Martini': 'classic',
+        'French Martini': 'french',
+        'Peach Bellini': 'peach',
+        'Espresso Martini': 'espresso'
+    }
     // Replace the image name in the path
-    imagePathParts[imagePathParts.length - 1] = newImageName + '.png';
+    imagePathParts[imagePathParts.length - 1] = drinks[drinkData] + '.png';
 
     // Join the parts back together to form the new path
     let newImagePath = imagePathParts.join('/');

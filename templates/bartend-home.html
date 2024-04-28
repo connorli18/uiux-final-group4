@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Main title -->
+<div id='quizpage_title' class="container">
+    The Bartender Simulation
+</div>
+
+<!-- Description and Image -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6"> 
+            <!-- Description -->
+            <div id='quizpage_description_1' class="container">
+                Test your bartending skills with a simulation! You will be asked to make one of the drinks that you learned in the previous section. Good luck, and happy drinking!
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6"> 
+            <!-- Image -->
+            <div class="quizpage_img_12">
+                <img src="https://static-00.iconduck.com/assets.00/bartender-illustration-2048x1662-w1r5d2da.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start Quiz Botton -->
+<div id='quizpage_startbutton_1' class ='container'>
+    <a class="btn btn-outline-success btn-lg" href="/bartender" role="button">Begin Quiz</a>
+</div>
+
+{% endblock %}

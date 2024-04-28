@@ -158,6 +158,18 @@ body{
     padding-bottom: 40px;
 }
 
+
+.quizpage_img_12 img {
+    width: 250px;
+    height: auto;
+}
+
+.quizpage_img_12{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Quizpage CSS */
 #quizpage_title{ 
     margin-top: 45px;
@@ -540,7 +552,7 @@ a.btn.selected-incorrect {
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 200px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 ul li {
