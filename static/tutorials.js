@@ -740,8 +740,16 @@ pourIntoGlassButton.addEventListener('mousedown', function () {
     // Add an 'f' in front of the image name
     let newImageName = 'f' + imageName;
 
+
+    drinks = {
+        'Classic Martini': 'classic',
+        'French Martini': 'french',
+        'Peach Bellini': 'peach',
+        'Espresso Martini': 'espresso'
+    }
+
     // Replace the image name in the path
-    imagePathParts[imagePathParts.length - 1] = newImageName + '.png';
+    imagePathParts[imagePathParts.length - 1] = drinks[chosen_drink] + '.png';
 
     // Join the parts back together to form the new path
     let newImagePath = imagePathParts.join('/');
