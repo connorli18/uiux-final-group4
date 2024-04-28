@@ -51,7 +51,7 @@ quiz = [
         "answer4": "Peach Bellini",
         "correctanswer": "Espresso Martini",
         "description": "Espresso Martini is the second most popular cocktail! Right after a Old Fashioned."
-    },
+    }
 ]
 # Routes
 @app.route("/hidden")
