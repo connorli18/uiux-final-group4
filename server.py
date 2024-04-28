@@ -113,8 +113,7 @@ quiz = [
         "answer4": "Peach Bellini",
         "correctanswer": "French Martini",
         "description": "The Pineapple Juice is one of the ingredients that gives the French Martini it's unqiue flavor!"
-    },
-
+    }
 ]
 # Routes
 @app.route("/hidden")
