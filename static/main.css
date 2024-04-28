@@ -4,6 +4,10 @@
     background-color: rgb(244, 239, 230);
 }
 
+.container{
+    padding-bottom: 5px;
+}
+
 /* Ensure that body and font is correct */
 body{
     background-color: rgb(244, 239, 230);
@@ -12,6 +16,7 @@ body{
 
 /* Design the Navigation Bar */
 #nav_div {
+    padding-top: 10px;
     display: flex;
     align-items: center; /* Vertically center the navbar */
 }
@@ -20,6 +25,7 @@ body{
     flex-direction: column; /* Stack the image and text vertically */
     align-items: center; /* Center items horizontally */
     padding-right: 12px;
+    justify-content: center;
 }
 
 .navbar_img {
@@ -40,11 +46,12 @@ body{
 #homepage_title{ 
     margin-top: 45px;
     margin-bottom: 45px;
-    font-size: 35px;
+    font-size: 40px;
     display: flex;
     justify-content: center; 
     align-items: center; 
     color: black;
+
 }
 #homepage_information_div_1{
     margin-top: 45px;
@@ -60,23 +67,95 @@ body{
     display: block;
     margin: 0 auto;
 }
+
+#homepage_option_img_11{
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+}
+
+#homepage_title-69{
+    padding-top: 30px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  
+
+.align-items-blals{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.space-bar{
+    padding-bottom: 40px;
+}
+
+.navbar-brand-12 {
+    padding-top: 10px;
+    color: black;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.another-one{
+    padding-top: 25px;
+}
+
+.navbar-brand-12:hover{
+    text-decoration: none;
+    color: #008000;
+}
+
 .navbar-brand {
     color: black;
+    font-size: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
+
+.navbar-brand:hover {
+    text-decoration: none;
+    color: #008000;
+}
+
+
+.navbar-brand-top {
+    color: black;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+    padding-left: 12px;
+    margin-left: 8px;
+}
+
+.navbar-brand-top:hover {
+    text-decoration: none;
+    color: #008000;
+}
+
+
 #homepage_quote_1{ 
     margin-top: 45px;
-    font-size: 15px;
+    font-size: 20px;
     display: flex;
     justify-content: left; 
     align-items: left; 
-    color: rgb(170, 170, 170);
+    color: rgb(162, 158, 158);
 }
 #homepage_quote_2{ 
-    font-size: 15px;
+    font-size: 20px;
     display: flex;
     justify-content: right; 
     align-items: right; 
-    color: rgb(170, 170, 170);
+    color: rgb(162, 158, 158);
+    padding-bottom: 40px;
 }
 
 /* Quizpage CSS */
@@ -229,7 +308,7 @@ a.btn.selected-incorrect {
 
 .notepad {
     position: absolute;
-    top: 130px;
+    top: 150px;
     right: 1130px;
     width: 150px;
     height: auto;
