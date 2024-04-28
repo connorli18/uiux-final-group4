@@ -1,1 +1,1 @@
-{"drinkName": "French Martini", "glassType": "Flute Glass", "mix": false, "shake": false, "addIce": false, "addIce2": false, "ingredients": {"Gin": 1}}
+{"drinkName": "Classic Martini", "glassType": "Martini Glass", "mix": false, "shake": false, "addIce": false, "addIce2": false, "ingredients": {"Chambord": 0.75}}
