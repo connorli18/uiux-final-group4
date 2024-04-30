@@ -11,17 +11,19 @@ instructions = {
             "Measure 2 oz (60 ml) of gin.", 1
         ],
         # Liqueurs
-        ["No need to add any liqueurs.", -1],
+        ["Choose dry vermouth as your liqueur",
+        "Pour around 0.5 oz in the glass", 2],
+
         # Syrups
         ["Do not add any syrups as this is a classic martini.", -1],
         # Juices/Mixers
-        ["It's usually garnished with a twist of lemon or an olive, no need for any juice or mixers", -1],
+        ["No need for any juice or mixers, you can garnish it with twist of lemon or an olive, ", -1],
         #
         [
     "Add ice to the cocktail shaker.",
     "Mix the ingredients with a mixer",
     "Pour the cocktail into the chilled glass.",
-    "Serve and enjoy, you will be headed to the Home page on click!"
+    "Serve and enjoy, you will be headed to a transition page on click!"
 ]
     #classic: [1][1] => box[1]
     ],
@@ -42,20 +44,20 @@ instructions = {
             "Measure 1/2 oz (15 ml) of raspberry liqueur.",1
         ],
         # Syrups
-        [#no syrups
+        [   #no syrups -> fix this crap
             "Optional, but you can add some syrup if you like.",
-            "If that's the case, don't go over 1/2 oz (15 ml)!", 0
+            "If that's the case, add 1/2 oz (15 ml)!", -1
         ],
-        # Juices/Mixers
+        # Juices/Mixers   => 0.75  
         [
             "Pineapple juice is a popular choice for this cocktail.", 
-            "Add 1/2 oz (15 ml) of pineapple juice.",1 
+            "Add 0.75 oz of pineapple juice.",1 
         ],
          [
     "Add ice to the cocktail shaker.",
     "Shake the ingredients inside the shaker",
     "Pour the cocktail into the chilled glass.",
-    "Serve and enjoy, you will be headed to the Home page on click!"
+    "Serve and enjoy, you will be headed to a transition page on click!"
 ]
 
         #French: [1][1] => box[1]; [2][1] => box[2]; [3][1] => box[3]; [4][1] => box[4]
@@ -88,7 +90,7 @@ instructions = {
     "Add ice to the cocktail shaker.",
     "Mix the ingredients with a mixer",
     "Pour the cocktail into the chilled glass.",
-    "Serve and enjoy, you will be headed to the Home page on click!"
+    "Serve and enjoy, you will be headed to a transition page on click!"
 ]
         # 
        #> [2][1] => box[1]; [3][1] => box[2]; [4][1] => box[3]
@@ -116,13 +118,13 @@ instructions = {
             "Put 0.5 oz of syrups in this classy cocktail.", 0],
         # Juices/Mixers
         [  #1.5 oz
-            "Brew a shot of espresso and let it cool to room temperature.", "1.5 oz is the recommended range", 0
+            "Brew a shot of espresso and let it cool to room temperature.", "Add 1.5 oz in the glass", 0
         ],
          [
     "Add ice to the cocktail shaker.",
     "Shake the ingredients inside the shaker",
     "Pour the cocktail into the chilled glass.",
-    "Serve and enjoy, you will be headed to the Home page on click!"
+    "Serve and enjoy, you will be headed to a transition page on click!"
 ]
     ]
 }

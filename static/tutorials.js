@@ -180,12 +180,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                                     ['Classic Martini', new Map([
                                                         ['11', 2],
+                                                        ['21', 0.5]
                                                     ])],
                                                     ['French Martini', new Map([
                                                         ['11', 1.5],
                                                         ['21', 0.5],
-                                                        ['31', 0.5],
-                                                        ['41', 0.5],
+                                                        // ['31', 0.5],
+                                                        ['41', 0.75],
 
                                                     ])],
                                                     ['Peach Bellini', new Map([
@@ -969,12 +970,13 @@ function checkMeasure(categoryIndex, stepIndex) {
 
         ['Classic Martini', new Map([
             ['11', 1],
+            ['21', 2],
         ])],
         ['French Martini', new Map([
             ['11', 1],
             ['21', 2],
-            ['31', 3],
-            ['41', 4],
+            // ['31', 3],
+            ['41', 3],
 
         ])],
         ['Peach Bellini', new Map([
