@@ -116,7 +116,7 @@ function displayQuizquestionPage(question_data, track_id){
             $(this).addClass("selected-incorrect");
             let row_3 = $("<div class='row'>");
             let wrong_div_1 = $("<div id='wrong-div' style='border: 4px solid red; color: red; padding: 10px; font-size: 20px;' class='container'>");
-            result = "Incorrect! " + description;
+            result = "Incorrect! Try again!";
             $(wrong_div_1).append(result);
             $(row_3).append(wrong_div_1);
             $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
