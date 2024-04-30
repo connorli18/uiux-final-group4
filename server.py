@@ -306,6 +306,18 @@ def resultPage():
         title_text = "Hmmmmm...Delicious and Refreshing!"
     return render_template("result.html", result=result, feedbacks=feedbacks, title_text=title_text)
 
+@app.route('/learning/transition', methods=['GET'])
+def learning_transition():
+    chosen_drink = request.args.get('drink')
+    drink_endpoints = {
+    'Peach Bellini': 'peach_bellini',
+    'French Martini': 'french_martini',
+    'Espresso Martini': 'espresso_martini',
+    'Classic Martini': 'classic_martini'
+}
+    
+    return render_template("learning-trans.html", chosen_drink = drink_endpoints[chosen_drink])
+
 @app.route('/get-bar-items')
 def get_items():
     category = request.args.get('category', default = '*', type = str)

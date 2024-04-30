@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             itemElement.addEventListener('click', function () {
 
-                                if (index === correctIndex) {
+                                if (index === correctIndex && currentStep === 0) {
                                     // Perform the desired action for the correct choice
                                     //trigger next button !
                                     if (categoryId !== 'glassware') {
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     countElement.style.zIndex = '1002';  // Make sure the count is above everything else
                                                     countElement.style.textAlign = 'center';
                                                     countElement.style.fontSize = '16px';  // Adjust this value to change the size of the count
-                                                    countElement.textContent = '0 oz';
+                                                    countElement.textContent = `${count} oz`;
 
 
                                                     // Add these lines to make the element a circle with a light grey background
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     if (countInterval) {
                                                         clearInterval(countInterval);
                                                         countElement.remove();
-                                                        count = 0;  // Reset the count
+
                                                     }
                                                 }
 
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                                     // Append the message element to the document body
                                     document.body.appendChild(messageElement);
-                                    console.log("message", messageElement);
+                                    console.log("message", messageElement.textContent);
                                     setTimeout(() => {
                                         // Remove the message element from the DOM
                                         document.body.removeChild(messageElement);
@@ -842,7 +842,9 @@ function displayTimer() {
 
 // JavaScript
 document.querySelector('.serving-button').addEventListener('click', function () {
-    window.location.href = '/';
+
+    window.location.href = '/learning/transition?drink=' + encodeURIComponent(chosen_drink);
+
 });
 
 
@@ -1088,7 +1090,7 @@ function boxHiglight(idx) {
         pourButton.style.display = 'block';
 
         pourButton.style.border = 'black 2px solid';
-        pourButton.style.animation = 'shake 1.2s infinite';
+        pourButton.style.animation = 'blink-red 1.8s infinite';
     }
 }
 
