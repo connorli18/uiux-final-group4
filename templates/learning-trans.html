@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Main title -->
+<div id='quizpage_title' class="container">
+    Congrats...You've completed the tutorial!
+</div>
+
+<!-- Description and Image -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-6"> 
+            <!-- Image -->
+            <div class="quizpage_img_14">
+                <img src="https://cdn-icons-png.flaticon.com/512/1138/1138101.png" alt="QuizComplete Image" width="256">
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6"> 
+            <!-- Description -->
+            <div id='quizcomplete_description_1' class="container">
+                Good job! You have now completed the tutorial for the {{ drink_name_proper }}. You are on your way to becoming the best bartender in NYC! 
+            </div> 
+            <div id='quizcomplete_description_1' class="container">
+                To polish up on the recipe for the {{ drink_name_proper }} again, press "Repeat Tutorial"; otherwise, please press "More Tutorials" to keep learning drinks! <br>
+                <br>
+                For a written quiz, please press "Written Quiz", and if you want to test your cocktail making skills in a real bar-setting, press "Bar Simulator".
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Buttons to repeat or go next -->
+<div id="quizcomplete_buttons_div" class="container">
+    <a id="quizcomplete_button_a" class='btn btn-outline-success btn-lg' href='/espresso_martini' role='button'>Repeat Tutorial</a>
+    <a id="quizcomplete_button_a" class='btn btn-outline-success btn-lg' href='/drinks' role='button'>More Tutorials</a>
+    <a id="quizcomplete_button_a" class='btn btn-outline-success btn-lg' href='/quiz' role='button'>Written Quiz</a>
+    <a id="quizcomplete_button_a" class='btn btn-outline-success btn-lg' href='/bartender' role='button'>Bar Simulator</a>
+</div>
+
+{% endblock %}

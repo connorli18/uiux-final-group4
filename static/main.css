@@ -170,6 +170,12 @@ body{
     align-items: center;
 }
 
+.quizpage_img_14 img {
+    margin-top: 90px;
+    padding-left: 150px;
+    width: 400px;
+}
+
 /* Quizpage CSS */
 #quizpage_title{ 
     margin-top: 45px;
