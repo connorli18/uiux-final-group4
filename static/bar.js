@@ -83,13 +83,22 @@ function displayQuizquestionPage(question_data, track_id){
     $("#quizpage_answer_1").append(row_2);   
     
     // Add click event listeners to answer buttons
+    // Add click event listeners to answer buttons
     $("a.btn").on("click", function() {
         let selectedAnswer = $(this).text(); // Get the text of the clicked button
-        answer_button_1.addClass("disabled");
-        answer_button_2.addClass("disabled");
-        answer_button_3.addClass("disabled");
-        answer_button_4.addClass("disabled");
-        
+
+        // Remove the disabled class from all buttons to allow re-selection
+        answer_button_1.removeClass("disabled");
+        answer_button_2.removeClass("disabled");
+        answer_button_3.removeClass("disabled");
+        answer_button_4.removeClass("disabled");
+
+        // Remove the selected-correct and selected-incorrect classes from all buttons to reset their state
+        answer_button_1.removeClass("selected-correct selected-incorrect");
+        answer_button_2.removeClass("selected-correct selected-incorrect");
+        answer_button_3.removeClass("selected-correct selected-incorrect");
+        answer_button_4.removeClass("selected-correct selected-incorrect");
+
         // Check if selected answer matches the correct answer
         if (selectedAnswer === correctanswer) {
             // Output correct response
@@ -100,7 +109,7 @@ function displayQuizquestionPage(question_data, track_id){
             result = "Correct! " + description;
             $(correct_div_1).append(result);
             $(row_3).append(correct_div_1);
-            $("#quizpage_feedback_1").append(row_3);   
+            $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
         } else {
             // Output wrong response
             console.log("Wrong answer response");
@@ -110,7 +119,7 @@ function displayQuizquestionPage(question_data, track_id){
             result = "Incorrect! " + description;
             $(wrong_div_1).append(result);
             $(row_3).append(wrong_div_1);
-            $("#quizpage_feedback_1").append(row_3);   
+            $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
         }
     });
 
