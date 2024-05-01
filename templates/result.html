@@ -12,20 +12,30 @@
     <div class="image-martini">
         <img src="{{ url_for('static', filename='images/random-martini.png') }}" alt="Martini">
     </div>
-    <div class="feedback">
-        <div class="feedback-title">
+    <div class="feedback" style="border: 4px black solid #ccc; padding: 20px; margin-bottom: 20px;">
+        <div class="feedback-title" style="font-size: 24px; font-weight: bold; color: #333;">
             Feedback:
         </div>
         <ul>
             {% for feedback in feedbacks[0:] %}
-                <li>{{ feedback }}</li>
+            <li style="font-size: 18px; color: #666; margin-bottom: 10px;"><span style="color: #ff8800;">★</span> {{ feedback }}</li>
             {% endfor %}
         </ul>
-    </div>
+    </div> 
     <div class="button-holders-butthole">
         <button id="butth-1" onclick="window.location.href='/drinks'">Relearn the Drinks</button>
         <button id="butth-2" onclick="window.location.href='/bartendhome'">Keep Practicing</button>
     </div>
+</div>
+<!-- Horizontal Line -->
+<div class="horizontal-line"></div>
+
+<!-- Final Quote -->
+<div id='homepage_quote_1' class="container">
+    "Alcohol may be man's worst enemy, but the bible says love your enemy.”
+</div>
+<div id='homepage_quote_2' class="container">
+    -Frank Sinatra
 </div>
 {% endblock %}
 

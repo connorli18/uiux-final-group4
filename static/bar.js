@@ -63,10 +63,10 @@ function displayQuizquestionPage(question_data, track_id){
     let answer_div_2 = $("<div id='answer-div' class='container'>");
     let answer_div_3 = $("<div id='answer-div' class='container'>");
     let answer_div_4 = $("<div id='answer-div' class='container'>");
-    let answer_button_1 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
-    let answer_button_2 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
-    let answer_button_3 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
-    let answer_button_4 = $("<a class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_1 = $("<a id='answer-button-1' class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_2 = $("<a id='answer-button-2' class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_3 = $("<a id='answer-button-3' class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
+    let answer_button_4 = $("<a id='answer-button-4' class='btn btn-outline-secondary btn-lg answer-btn' role='button'></a>");
     $(answer_button_1).append(answer1); 
     $(answer_button_2).append(answer2); 
     $(answer_button_3).append(answer3);
@@ -82,47 +82,6 @@ function displayQuizquestionPage(question_data, track_id){
     $(row_2).append(div_question_col_12_2);
     $("#quizpage_answer_1").append(row_2);   
     
-    // Add click event listeners to answer buttons
-    // Add click event listeners to answer buttons
-    $("a.btn").on("click", function() {
-        let selectedAnswer = $(this).text(); // Get the text of the clicked button
-
-        // Remove the disabled class from all buttons to allow re-selection
-        answer_button_1.removeClass("disabled");
-        answer_button_2.removeClass("disabled");
-        answer_button_3.removeClass("disabled");
-        answer_button_4.removeClass("disabled");
-
-        // Remove the selected-correct and selected-incorrect classes from all buttons to reset their state
-        answer_button_1.removeClass("selected-correct selected-incorrect");
-        answer_button_2.removeClass("selected-correct selected-incorrect");
-        answer_button_3.removeClass("selected-correct selected-incorrect");
-        answer_button_4.removeClass("selected-correct selected-incorrect");
-
-        // Check if selected answer matches the correct answer
-        if (selectedAnswer === correctanswer) {
-            // Output correct response
-            console.log("Correct answer response");
-            $(this).addClass("selected-correct");
-            let row_3 = $("<div class='row'>");
-            let correct_div_1 = $("<div id='correct-div' style='border: 4px solid green; color: green; padding: 10px; font-size: 20px;' class='container'>");
-            result = "Correct! " + description;
-            $(correct_div_1).append(result);
-            $(row_3).append(correct_div_1);
-            $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
-        } else {
-            // Output wrong response
-            console.log("Wrong answer response");
-            $(this).addClass("selected-incorrect");
-            let row_3 = $("<div class='row'>");
-            let wrong_div_1 = $("<div id='wrong-div' style='border: 4px solid red; color: red; padding: 10px; font-size: 20px;' class='container'>");
-            result = "Incorrect! Try again!";
-            $(wrong_div_1).append(result);
-            $(row_3).append(wrong_div_1);
-            $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
-        }
-    });
-
     // Set up next and prev button
     console.log(track_id);
     next_id = track_id + 1;
@@ -147,11 +106,59 @@ function displayQuizquestionPage(question_data, track_id){
         $(prev_button_1).attr('href', prev_href);
         $(next_button_1).attr('href', next_href);
     }
+    $(prev_button_1).addClass("disabled");
+    $(next_button_1).addClass("disabled");
     $(final_div_1).append(prev_button_1);
     $(final_div_1).append(next_button_1);
     $(div_question_col_12_3).append(final_div_1);
     $(row_3).append(div_question_col_12_3);
     $("#quizpage_nextbutton_1").append(row_3); 
+    
+    // Add click event listeners to answer buttons
+    $("#answer-button-1, #answer-button-2, #answer-button-3, #answer-button-4").on("click", function() {
+        let selectedAnswer = $(this).text(); // Get the text of the clicked button
+        console.log(selectedAnswer);
+
+        // Remove the disabled class from all buttons to allow re-selection
+        answer_button_1.removeClass("disabled");
+        answer_button_2.removeClass("disabled");
+        answer_button_3.removeClass("disabled");
+        answer_button_4.removeClass("disabled");
+
+        // Remove the selected-correct and selected-incorrect classes from all buttons to reset their state
+        answer_button_1.removeClass("selected-correct selected-incorrect");
+        answer_button_2.removeClass("selected-correct selected-incorrect");
+        answer_button_3.removeClass("selected-correct selected-incorrect");
+        answer_button_4.removeClass("selected-correct selected-incorrect");
+
+        // Check if selected answer matches the correct answer
+        if (selectedAnswer === correctanswer) {
+            // Output correct response
+            console.log("Correct answer response");
+            $(this).addClass("selected-correct");
+            let row_3 = $("<div class='row'>");
+            let correct_div_1 = $("<div id='correct-div' style='border: 4px solid green; color: green; padding: 10px; font-size: 20px;' class='container'>");
+            result = "Correct! " + description;
+            $(correct_div_1).append(result);
+            $(row_3).append(correct_div_1);
+            $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
+            $(prev_button_1).removeClass("disabled");
+            $(next_button_1).removeClass("disabled");
+        } else {
+            // Output wrong response
+            console.log("Wrong answer response");
+            $(this).addClass("selected-incorrect");
+            let row_3 = $("<div class='row'>");
+            let wrong_div_1 = $("<div id='wrong-div' style='border: 4px solid red; color: red; padding: 10px; font-size: 20px;' class='container'>");
+            result = "Incorrect! Try again!";
+            $(wrong_div_1).append(result);
+            $(row_3).append(wrong_div_1);
+            $("#quizpage_feedback_1").html(row_3);   // Replace the existing feedback with the new feedback
+            $(prev_button_1).removeClass("disabled");
+            $(next_button_1).removeClass("disabled");
+        }
+        
+    });
 
 }
 
