@@ -289,6 +289,9 @@ a.btn.selected-incorrect {
     background-color: red; 
     color: #fff; 
 }
+#final-div{
+    padding_bottom = 20px;
+}
 
 
 .items-menu{

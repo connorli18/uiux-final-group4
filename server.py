@@ -27,22 +27,22 @@ quiz = [
     {
         "id": 2, 
         "question": "Using the provided recipe for the Espresso Martini, how many ounces of coffee liqueur are you supposed to use to create 3 of this drink?",
-        "answer1": "1.5 oz",
-        "answer2" : "3 oz",
-        "answer3": "4.5 oz",
-        "answer4": "225 oz",
-        "correctanswer": "3 oz",
-        "description": "Remember that the recipe for the Espresso Martini contains 1 oz of coffee liqueur per drink! Thus, if you have 3 drinks, you would require 3 oz of coffee liqueur total",
+        "answer1": "1.50 oz",
+        "answer2" : "3.00 oz",
+        "answer3": "4.50 oz",
+        "answer4": "225.00 oz",
+        "correctanswer": "3.00 oz",
+        "description": "Remember that the recipe for the Espresso Martini contains 1 oz of coffee liqueur per drink! Thus, if you have 3 drinks, you would require 3 oz of coffee liqueur total!",
     },
     {
         "id": 3, 
         "question": "What alcohol belongs in an Espresso Martini?",
         "answer1": "Tequila",
         "answer2" : "Whiskey",
-        "answer3": "Coffee Liquor",
-        "answer4": "Gin",
-        "correctanswer": "Coffee Liquor",
-        "description": "Remember that Coffee Liquor is a main ingredient in an Espresso Martini",
+        "answer3": "Coffee Liqueur",
+        "answer4": "Raspberry Liqueur",
+        "correctanswer": "Coffee Liqueur",
+        "description": "Remember that Coffee Liquor is a main ingredient in an Espresso Martini!",
     },
     {
         "id": 4, 
@@ -52,7 +52,7 @@ quiz = [
         "answer3": "Classic Martini",
         "answer4": "Peach Bellini",
         "correctanswer": "Espresso Martini",
-        "description": "Espresso Martini is the second most popular cocktail! Right after a Old Fashioned."
+        "description": "Espresso Martini is the second most popular cocktail! Right after an Old Fashioned!"
     },
     {
         "id": 5, 
@@ -72,7 +72,7 @@ quiz = [
         "answer3": "Espresso Martini",
         "answer4": "Peach Bellini",
         "correctanswer": "Peach Bellini",
-        "description": "A Peach Bellini is prepared in a chilled champagne flute. A Classic Martini is prepared in a martini glass. An Espresso Martini and a French Martini are prepared in a chilled coupe glass."
+        "description": "A Peach Bellini is prepared in a chilled champagne flute. A Classic Martini is prepared in a martini glass. An Espresso Martini and a French Martini are prepared in a chilled coupe glass!"
     },
     {
         "id": 7, 
@@ -82,7 +82,7 @@ quiz = [
         "answer3": "Banana Liqueur",
         "answer4": "Chocolate Liqueur",
         "correctanswer": "Raspberry Liqueur",
-        "description": "An important ingredient in a French Martini is Raspberry Liqueur."
+        "description": "An important ingredient in a French Martini is Raspberry Liqueur!"
     },
     {
         "id": 8, 
@@ -92,17 +92,17 @@ quiz = [
         "answer3": "Tequila",
         "answer4": "Gin",
         "correctanswer": "Champagne",
-        "description": "The main ingredient in a Peach Bellini is Champagne."
+        "description": "The main ingredient in a Peach Bellini is Champagne!"
     },
     {
         "id": 9, 
-        "question": "Which drink has the least number of ingredients and steps for preparation?",
+        "question": "Which drink has the most number of steps for preparation?",
         "answer1": "Espresso Martini",
         "answer2" : "Peach Bellini",
         "answer3": "Classic Martini",
         "answer4": "French Martini",
-        "correctanswer": "Classic Martini",
-        "description": "The Classic Martini is the easiest drink to make. However it is by far the strongest in flavor of them all!"
+        "correctanswer": "French Martini",
+        "description": "The French Martini has the most number of steps. However, this packs it with flavor and gives it a unique taste!"
     },
     {
         "id": 10, 
@@ -113,7 +113,217 @@ quiz = [
         "answer4": "Peach Bellini",
         "correctanswer": "French Martini",
         "description": "The Pineapple Juice is one of the ingredients that gives the French Martini it's unqiue flavor!"
-    }
+    },
+    {
+        "id": 11, 
+        "question": "What alcohol belongs in an French Martini?",
+        "answer1": "Tequila",
+        "answer2" : "Whiskey",
+        "answer3": "Coffee Liqueur",
+        "answer4": "Raspberry Liqueur",
+        "correctanswer": "Raspberry Liqueur",
+        "description": "Remember that Respberry Liquor is a main ingredient in an French Martini!",
+    },
+    {
+        "id": 12, 
+        "question": "Which drink contains Peach Juice?",
+        "answer1": "Classic Martini",
+        "answer2" : "French Martini",
+        "answer3": "Espresso Martini",
+        "answer4": "Peach Bellini",
+        "correctanswer": "Peach Bellini",
+        "description": "The Peach Juice is one of the ingredients that gives the Peach Bellini it's unqiue flavor!"
+    },
+    {
+        "id": 13, 
+        "question": "How many ounzes of Vodka are in an Espresso Martini?",
+        "answer1": "1.50 oz",
+        "answer2" : "3.00 oz",
+        "answer3": "4.50 oz",
+        "answer4": "2.00 oz",
+        "correctanswer": "1.50 oz",
+        "description": "Remember that the recipe for the Espresso Martini contains 1.50 oz of vodka!" 
+    },
+    {
+        "id": 14, 
+        "question": "How many ounzes of Coffee Liqueur are in an Espresso Martini?",
+        "answer1": "1.50 oz",
+        "answer2" : "3.00 oz",
+        "answer3": "1.00 oz",
+        "answer4": "2.00 oz",
+        "correctanswer": "1.00 oz",
+        "description": "The recipe for the Espresso Martini contains 1.00 oz of coffee liqueur!"
+    },
+    {
+        "id": 15, 
+        "question": "How many ounzes of Simple Syrup are in an Espresso Martini?",
+        "answer1": "1.50 oz",
+        "answer2" : "3.00 oz",
+        "answer3": "1.00 oz",
+        "answer4": "0.50 oz",
+        "correctanswer": "0.50 oz",
+        "description": "Remember if you would like to add simple syrup to your Espresso Martini, you should add 0.50 oz!"
+    },
+    {
+        "id": 16, 
+        "question": "How many ounzes of Espresso Shots are in an Espresso Martini?",
+        "answer1": "1.50 oz",
+        "answer2" : "3.00 oz",
+        "answer3": "1.00 oz",
+        "answer4": "0.50 oz",
+        "correctanswer": "1.50 oz",
+        "description": "The recipe for the Espresso Martini contains 1.50 oz of espresso shots. That is exactly one shot of espresso!"
+    },
+    {
+        "id": 17, 
+        "question": "What glass is an Espresso Martini prepared in?",
+        "answer1": "Coupe glass",
+        "answer2" : "Champagne flute glass",
+        "answer3": "Martini glass",
+        "answer4": "Collins glass",
+        "correctanswer": "Coupe glass",
+        "description": "An Espresso Martini is traditionally prepared in a chilled coupe glass!"
+    },
+    {
+        "id": 18, 
+        "question": "What glass is a Classic Martini prepared in?",
+        "answer1": "Coupe glass",
+        "answer2" : "Champagne flute glass",
+        "answer3": "Martini glass",
+        "answer4": "Collins glass",
+        "correctanswer": "Martini glass",
+        "description": "An Classic Martini is traditionally prepared in a Chilled Martini glass!"
+    },
+    {
+        "id": 19, 
+        "question": "How many ounzes of Gin are in a Classic Martini?",
+        "answer1": "3.50 oz",
+        "answer2" : "1.00 oz",
+        "answer3": "2.00 oz",
+        "answer4": "5.50 oz",
+        "correctanswer": "2.00 oz",
+        "description": "A Classic Martini has 2.00 oz of Gin. That's what gives it the unique and bold flavor!"
+    },
+    {
+        "id": 20, 
+        "question": "What is the liquor used in an Classic Martini?",
+        "answer1": "Vodka",
+        "answer2" : "Gin",
+        "answer3": "Champagne",
+        "answer4": "Tequila",
+        "correctanswer": "Gin",
+        "description": "The Gin gives the Classic Martini its unique and bold flavor!"
+    },
+    {
+        "id": 21, 
+        "question": "What is the liqueur used in an Classic Martini?",
+        "answer1": "Coffee Liqueur",
+        "answer2" : "Raspberry Liqueur",
+        "answer3": "Dry Vermouth",
+        "answer4": "Banana Liqueur",
+        "correctanswer": "Dry Vermouth",
+        "description": "The Dry Vermouth gives the Classic Martini its sweetness!"
+    },
+    {
+        "id": 22, 
+        "question": "What is the liquor used in an Peach Bellini?",
+        "answer1": "Vodka",
+        "answer2" : "Gin",
+        "answer3": "Champagne",
+        "answer4": "Tequila",
+        "correctanswer": "Champagne",
+        "description": "The Champagne gives the Peach Bellini its unique flavor!"
+    },
+    {
+        "id": 23, 
+        "question": "How many ounzes of Champagne are in a Peach Bellini?",
+        "answer1": "1.50 oz",
+        "answer2" : "4.50 oz",
+        "answer3": "3.00 oz",
+        "answer4": "5.50 oz",
+        "correctanswer": "3.00 oz",
+        "description": "Remember that the recipe for the Peach Bellini contains 3.00 oz of Champange!"
+    },
+    {
+        "id": 24, 
+        "question": "How many ounzes of Peach Juice are in a Peach Bellini?",
+        "answer1": "0.50 oz",
+        "answer2" : "3.50 oz",
+        "answer3": "2.00 oz",
+        "answer4": "5.50 oz",
+        "correctanswer": "2.00 oz",
+        "description": "The recipe for the Peach Bellini contains 2.00 oz of Peach Juice. That gives it a tropically flavor!"
+    },
+    {
+        "id": 25, 
+        "question": "What glass is a French Martini prepared in?",
+        "answer1": "Coupe glass",
+        "answer2" : "Champagne Flute glass",
+        "answer3": "Martini glass",
+        "answer4": "Collins glass",
+        "correctanswer": "Coupe glass",
+        "description": "A French Martini is traditionally prepared in a Chilled Coupe glass!"
+    },
+    {
+        "id": 26, 
+        "question": "What is the liquor used in an French Martini?",
+        "answer1": "Vodka",
+        "answer2" : "Gin",
+        "answer3": "Champagne",
+        "answer4": "Tequila",
+        "correctanswer": "Vodka",
+        "description": "Adding Vodka is the first step when preparing a French Martini!"
+    },
+    {
+        "id": 27, 
+        "question": "How many ounzes of Vodka are in a French Martini?",
+        "answer1": "1.50 oz",
+        "answer2" : "5.50 oz",
+        "answer3": "3.00 oz",
+        "answer4": "4.00 oz",
+        "correctanswer": "1.50 oz",
+        "description": "The recipe for the French Martini contains 1.50 oz of Vodka."
+    },
+    {
+        "id": 28, 
+        "question": "How many ounzes of Raspberry Liqueur are in a French Martini?",
+        "answer1": "3.00 oz",
+        "answer2" : "4.00 oz",
+        "answer3": "1.50 oz",
+        "answer4": "5.50 oz",
+        "correctanswer": "1.50 oz",
+        "description": "The recipe for the French Martini contains 1.50 oz of Raspberry Liqueur!"
+    },
+    {
+        "id": 29, 
+        "question": "How many ounzes of Pineapple Juice are in a French Martini?",
+        "answer1": "0.75 oz",
+        "answer2" : "2.00 oz",
+        "answer3": "1.50 oz",
+        "answer4": "3.50 oz",
+        "correctanswer": "0.75 oz",
+        "description": "The recipe for the French Martini contains 0.75 oz of Pineapple Juice."
+    },
+    {
+        "id": 30, 
+        "question": "Using the recipe for the Classic Martini, please name the liquor and liqueur combination in this amazing drink!",
+        "answer1": "Rum & Chartreuse",
+        "answer2" : "Gin & Dry Vermouth",
+        "answer3": "Gin & Chambord",
+        "answer4": "Vodka & Chambord",
+        "correctanswer": "Gin & Dry Vermouth",
+        "description": "Gin & Dry Vermouth is the correct combination to make the Classic Martini. This combination has made this drink very popular!",
+    },
+    {
+        "id": 31, 
+        "question": "Using the recipe for the Espresso Martini, please name the liquor and liqueur combination in this amazing drink!",
+        "answer1": "Vodka & Chambord",
+        "answer2" : "Vodka & Coffee Liqueur",
+        "answer3": "Rum & Chartreus",
+        "answer4": "Gin & Chambord",
+        "correctanswer": "Vodka & Coffee Liqueur",
+        "description": "Vodka & Coffee Liqueur is the correct combination to make the Espresso Martini. This combination has made this drink very popular!",
+    },
 ]
 # Routes
 @app.route("/hidden")
@@ -171,7 +381,7 @@ def quizquestion():
     if len(random_int_set) == 5:
         random_int_set.clear()
 
-    random_int = random.randint(1, 10) 
+    random_int = random.randint(1, 31) 
     if random_int not in random_int_set: 
         id = random_int
         random_int_set.add(random_int)

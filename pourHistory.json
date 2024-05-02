@@ -1,1 +1,1 @@
-{"drinkName": "French Martini", "glassType": "Martini Glass", "mix": false, "shake": false, "addIce": false, "addIce2": false, "ingredients": {"Vodka": 1.5, "Chambord": 0.75, "Dry Vermouth": 0.25, "Pineapple Juice": 0.5}}
+{"drinkName": "Classic Martini", "glassType": "Coupe Glass", "mix": false, "shake": false, "addIce": false, "addIce2": false, "ingredients": {"Vodka": 1.5, "Chambord": 1, "Simple Syrup": 0.5, "Pineapple Juice": 1}}
