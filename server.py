@@ -96,13 +96,13 @@ quiz = [
     },
     {
         "id": 9, 
-        "question": "Which drink has the most number of steps for preparation?",
+        "question": "Which drink has Dry Vermouth in it?",
         "answer1": "Espresso Martini",
         "answer2" : "Peach Bellini",
         "answer3": "Classic Martini",
         "answer4": "French Martini",
-        "correctanswer": "French Martini",
-        "description": "The French Martini has the most number of steps. However, this packs it with flavor and gives it a unique taste!"
+        "correctanswer": "Classic Martini",
+        "description": "Vermouth is one of two defining ingredients in a Classic Martini!"
     },
     {
         "id": 10, 
@@ -122,7 +122,7 @@ quiz = [
         "answer3": "Coffee Liqueur",
         "answer4": "Raspberry Liqueur",
         "correctanswer": "Raspberry Liqueur",
-        "description": "Remember that Respberry Liquor is a main ingredient in an French Martini!",
+        "description": "Remember that Respberry Liquor (Chambord) is a main ingredient in an French Martini!",
     },
     {
         "id": 12, 
@@ -136,7 +136,7 @@ quiz = [
     },
     {
         "id": 13, 
-        "question": "How many ounzes of Vodka are in an Espresso Martini?",
+        "question": "How many ounces of Vodka are in an Espresso Martini?",
         "answer1": "1.50 oz",
         "answer2" : "3.00 oz",
         "answer3": "4.50 oz",
@@ -146,7 +146,7 @@ quiz = [
     },
     {
         "id": 14, 
-        "question": "How many ounzes of Coffee Liqueur are in an Espresso Martini?",
+        "question": "How many ounces of Coffee Liqueur are in an Espresso Martini?",
         "answer1": "1.50 oz",
         "answer2" : "3.00 oz",
         "answer3": "1.00 oz",
@@ -156,7 +156,7 @@ quiz = [
     },
     {
         "id": 15, 
-        "question": "How many ounzes of Simple Syrup are in an Espresso Martini?",
+        "question": "How many ounces of Simple Syrup are in an Espresso Martini?",
         "answer1": "1.50 oz",
         "answer2" : "3.00 oz",
         "answer3": "1.00 oz",
@@ -166,7 +166,7 @@ quiz = [
     },
     {
         "id": 16, 
-        "question": "How many ounzes of Espresso Shots are in an Espresso Martini?",
+        "question": "How many ounces of Espresso Shots are in an Espresso Martini?",
         "answer1": "1.50 oz",
         "answer2" : "3.00 oz",
         "answer3": "1.00 oz",
@@ -196,7 +196,7 @@ quiz = [
     },
     {
         "id": 19, 
-        "question": "How many ounzes of Gin are in a Classic Martini?",
+        "question": "How many ounces of Gin are in a Classic Martini?",
         "answer1": "3.50 oz",
         "answer2" : "1.00 oz",
         "answer3": "2.00 oz",
@@ -236,7 +236,7 @@ quiz = [
     },
     {
         "id": 23, 
-        "question": "How many ounzes of Champagne are in a Peach Bellini?",
+        "question": "How many ounces of Champagne are in a Peach Bellini?",
         "answer1": "1.50 oz",
         "answer2" : "4.50 oz",
         "answer3": "3.00 oz",
@@ -246,7 +246,7 @@ quiz = [
     },
     {
         "id": 24, 
-        "question": "How many ounzes of Peach Juice are in a Peach Bellini?",
+        "question": "How many ounces of Peach Juice are in a Peach Bellini?",
         "answer1": "0.50 oz",
         "answer2" : "3.50 oz",
         "answer3": "2.00 oz",
@@ -276,7 +276,7 @@ quiz = [
     },
     {
         "id": 27, 
-        "question": "How many ounzes of Vodka are in a French Martini?",
+        "question": "How many ounces of Vodka are in a French Martini?",
         "answer1": "1.50 oz",
         "answer2" : "5.50 oz",
         "answer3": "3.00 oz",
@@ -286,7 +286,7 @@ quiz = [
     },
     {
         "id": 28, 
-        "question": "How many ounzes of Raspberry Liqueur are in a French Martini?",
+        "question": "How many ounces of Raspberry Liqueur are in a French Martini?",
         "answer1": "3.00 oz",
         "answer2" : "4.00 oz",
         "answer3": "1.50 oz",
@@ -296,7 +296,7 @@ quiz = [
     },
     {
         "id": 29, 
-        "question": "How many ounzes of Pineapple Juice are in a French Martini?",
+        "question": "How many ounces of Pineapple Juice are in a French Martini?",
         "answer1": "0.75 oz",
         "answer2" : "2.00 oz",
         "answer3": "1.50 oz",
